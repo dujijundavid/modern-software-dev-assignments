@@ -7,7 +7,28 @@ load_dotenv()
 NUM_RUNS_TIMES = 5
 
 # TODO: Fill this in!
-YOUR_SYSTEM_PROMPT = ""
+YOUR_SYSTEM_PROMPT = """Reverse the word by writing out each letter from last to first.
+
+Examples with step-by-step reversal:
+
+Example 1: "hello"
+Write letters in reverse order: o, l, l, e, h
+Output: olleh
+
+Example 2: "code"  
+Write letters in reverse order: e, d, o, c
+Output: edoc
+
+Example 3: "cat"
+Write letters in reverse order: t, a, c
+Output: tac
+
+Example 4: "httpstatus"
+Original letters in order: h, t, t, p, s, t, a, t, u, s
+Write in reverse order: s, u, t, a, t, s, p, t, t, h
+Output: sutatsptth
+
+Task: Reverse the given word using the same method. Output ONLY the reversed word."""
 
 USER_PROMPT = """
 Reverse the order of letters in the following word. Only output the reversed word, no other text:
@@ -26,7 +47,7 @@ def test_your_prompt(system_prompt: str) -> bool:
     for idx in range(NUM_RUNS_TIMES):
         print(f"Running test {idx + 1} of {NUM_RUNS_TIMES}")
         response = chat(
-            model="mistral-nemo:12b",
+            model="llama3.1:8b",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": USER_PROMPT},
