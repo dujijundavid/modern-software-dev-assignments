@@ -7,7 +7,19 @@ load_dotenv()
 NUM_RUNS_TIMES = 5
 
 # TODO: Fill this in!
-YOUR_SYSTEM_PROMPT = ""
+YOUR_SYSTEM_PROMPT = """You reverse words by writing the last letter first, then the second-to-last, and so on.
+
+Examples:
+"hello" → "olleh"
+"world" → "dlrow"  
+"test" → "tset"
+"cat" → "tac"
+"httpstatus" → "sutatsptth"
+
+Remember: 
+- Only output the reversed word
+- No explanation, no extra text
+- Just reverse the order of all letters"""
 
 USER_PROMPT = """
 Reverse the order of letters in the following word. Only output the reversed word, no other text:
