@@ -4,7 +4,7 @@ from ollama import chat
 
 load_dotenv()
 
-NUM_RUNS_TIMES = 5
+NUM_RUNS_TIMES = 10
 
 # TODO: Fill this in!
 YOUR_SYSTEM_PROMPT = """You reverse words by writing the last letter first, then the second-to-last, and so on.
@@ -30,11 +30,13 @@ httpstatus
 
 EXPECTED_OUTPUT = "sutatsptth"
 
-def test_your_prompt(system_prompt: str) -> bool:
-    """Run the prompt up to NUM_RUNS_TIMES and return True if any output matches EXPECTED_OUTPUT.
+def test_your_prompt(system_prompt: str) -> tuple[int, int]:
+    """Run the prompt NUM_RUNS_TIMES and return (success_count, total_runs).
 
-    Prints "SUCCESS" when a match is found.
+    Continues running all iterations regardless of success.
+    Prints summary with pass rate at the end.
     """
+    success_count = 0
     for idx in range(NUM_RUNS_TIMES):
         print(f"Running test {idx + 1} of {NUM_RUNS_TIMES}")
         response = chat(
@@ -48,11 +50,18 @@ def test_your_prompt(system_prompt: str) -> bool:
         output_text = response.message.content.strip()
         if output_text.strip() == EXPECTED_OUTPUT.strip():
             print("SUCCESS")
-            return True
+            success_count += 1
         else:
             print(f"Expected output: {EXPECTED_OUTPUT}")
             print(f"Actual output: {output_text}")
-    return False
+    
+    # Display final pass rate summary
+    pass_rate = (success_count / NUM_RUNS_TIMES) * 100
+    print(f"\n{'='*50}")
+    print(f"Final Results: {success_count}/{NUM_RUNS_TIMES} tests passed ({pass_rate:.1f}%)")
+    print(f"{'='*50}")
+    
+    return success_count, NUM_RUNS_TIMES
 
 if __name__ == "__main__":
     test_your_prompt(YOUR_SYSTEM_PROMPT)
