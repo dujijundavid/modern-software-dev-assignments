@@ -11,12 +11,6 @@ Tip: To preview this markdown file
 
 ## Getting Started
 
-### Cursor Set Up
-Follow these instructions to set up Cursor and open your project:
-1. Redeem your free year of Cursor Pro: https://cursor.com/students
-2. Download Cursor: https://cursor.com/download
-3. To enable the Cursor command line tool, open Cursor and press `Command (⌘) + Shift+ P` for Mac users (or `Ctrl + Shift + P` for non-Mac users) to open the Command Palette. Type: `Shell Command: Install 'cursor' command`. Select it and hit Enter.
-4. Open a new terminal window, navigate to your project root, and run: `cursor .`
 
 ### Current Application
 Here's how you can start running the current starter application: 
