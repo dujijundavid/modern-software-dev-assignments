@@ -68,18 +68,22 @@ def main():
 
 ## 运行服务器
 
-### 方式1: 直接运行（推荐）
-```bash
-cd weather_server
-source .venv/bin/activate
-python weather.py
-```
+### ⚠️ 重要说明
+**直接运行 `uv run weather.py` 不会有任何输出！这是正常的！**
 
-### 方式2: 使用 uv run（官方推荐）
+原因：MCP 服务器使用 `stdio` (标准输入/输出) 传输模式，它会：
+1. 启动后等待来自客户端的 JSON-RPC 消息
+2. 不会主动输出任何内容（根据 MCP 规范，stdio 模式下禁止使用 `print()`）
+3. 只有当客户端（如 Claude Desktop）连接时才会响应
+
+### 方式1: 通过 Claude Desktop 使用（推荐）
+这是 MCP 服务器的设计用途，见下方"连接到 Claude for Desktop"章节。
+
+### 方式2: 使用测试脚本验证服务器
 ```bash
-uv run weather.py
+uv run test_server.py
 ```
-`uv run` 会自动激活虚拟环境并运行脚本。
+这会模拟客户端连接，测试服务器的两个工具是否正常工作。
 
 ## 连接到 Claude for Desktop
 
@@ -150,6 +154,9 @@ def main():
 
 ## 常见问题
 
+### Q: 为什么运行 `uv run weather.py` 没有任何输出？
+**A**: 这是正常的！MCP 服务器使用 stdio 模式，它会等待客户端（如 Claude Desktop）通过标准输入发送 JSON-RPC 消息。服务器启动后会阻塞等待输入，不会主动输出内容。要测试服务器，使用 `uv run test_server.py` 或通过 Claude Desktop 连接。
+
 ### Q: 为什么使用 uv 而不是 pip？
 **A**: `uv` 是 Rust 编写的现代 Python 包管理工具，比 pip 快 10-100 倍，且能更好地管理项目依赖。
 
@@ -164,6 +171,7 @@ def main():
 
 ## 项目文件说明
 - `weather.py`: MCP 服务器主程序
+- `test_server.py`: 服务器测试脚本（模拟客户端连接）
 - `pyproject.toml`: 项目配置和依赖管理
 - `uv.lock`: 锁定依赖版本，确保可重现构建
 - `.venv/`: 虚拟环境目录
