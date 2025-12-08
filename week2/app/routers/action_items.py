@@ -14,6 +14,13 @@ router = APIRouter(prefix="/action-items", tags=["action-items"])
 @router.post("/extract")
 def extract(payload: Dict[str, Any]) -> Dict[str, Any]:
     text = str(payload.get("text", "")).strip()
+    
+    # DEBUG: Log what the router received
+    print(f"\n🌐 [Router /extract] Received text:")
+    print(f"   Raw repr: {repr(text)}")
+    print(f"   Length: {len(text)} chars")
+    print(f"   First 100 chars: {text[:100]}")
+    
     if not text:
         raise HTTPException(status_code=400, detail="text is required")
 
