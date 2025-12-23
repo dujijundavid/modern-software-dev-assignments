@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(sc:document)",
+      "Skill(sc:document:*)",
+      "Skill(sc:implement)",
+      "Skill(sc:test)",
+      "Skill(sc:analyze)",
+      "Skill(sc:build)",
+      "Skill(sc:research)",
+      "Task:*",
+      "AskUserQuestion:*",
+      "Bash(python -m pytest:*)",
+      "Bash(python:*)",
+      "Bash(git add:*)"
+    ]
+  },
+  "enableAllProjectMcpServers": true
+}
