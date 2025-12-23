@@ -119,3 +119,139 @@ def _looks_imperative(sentence: str) -> bool:
         "investigate",
     }
     return first.lower() in imperative_starters
+
+
+# ============================================================================
+# TODO 1: LLM-Powered Action Item Extraction
+# ============================================================================
+def extract_action_items_llm(text: str, model: str = "llama3.1:8b") -> List[str]:
+    """
+    Extract action items from free-form notes using an LLM with structured outputs.
+    
+    This function sends the user's notes to an Ollama-hosted LLM with a carefully
+    crafted prompt and JSON schema, ensuring the response is a valid list of strings.
+    
+    Args:
+        text: Raw note text from user (e.g., meeting notes, brainstorming)
+        model: Ollama model name (default: llama3.1:8b for balance of speed/quality)
+        
+    Returns:
+        List[str]: Extracted action items as clean strings, deduplicated
+        
+    Example:
+        >>> notes = "Meeting notes: - Fix bug #123, TODO: Write tests"
+        >>> extract_action_items_llm(notes)
+        ['Fix bug #123', 'Write tests']
+    """
+    # DEBUG: Log input for traceability
+    print(f"\n🤖 [extract_action_items_llm] Using model: {model}")
+    print(f"📝 [extract_action_items_llm] Input text (first 100 chars): {text[:100]}...")
+    
+    # Edge case: Handle empty or whitespace-only input
+    if not text or not text.strip():
+        print("⚠️  [extract_action_items_llm] Empty input, returning empty list")
+        return []
+    
+    # -------------------------------------------------------------------------
+    # Step 1: Construct the system prompt
+    # -------------------------------------------------------------------------
+    # This prompt instructs the LLM on:
+    # - What to extract (actionable tasks, not general statements)
+    # - What to ignore (greetings, context, non-actionable content)
+    # - Output format expectations (even though JSON schema enforces it)
+    system_prompt = """You are an expert assistant that extracts actionable tasks from meeting notes, brainstorming sessions, or free-form text.
+
+**Your task:**
+1. Identify sentences or phrases that represent concrete, actionable items (things someone should DO)
+2. Extract them as clear, concise action items
+3. Remove formatting markers like bullets, checkboxes, or prefixes (e.g., "TODO:", "[ ]")
+4. Ignore non-actionable content like greetings, context, or general statements
+
+**Examples of actionable items:**
+- "Set up database" → Extract
+- "Fix bug #123" → Extract  
+- "The meeting was productive" → Ignore (not actionable)
+- "Review pull requests by Friday" → Extract
+
+Return only the action items as a JSON array of strings."""
+
+    # -------------------------------------------------------------------------
+    # Step 2: Define JSON schema for structured output
+    # -------------------------------------------------------------------------
+    # This schema FORCES the LLM to return valid JSON in this exact structure:
+    # { "action_items": ["item1", "item2", ...] }
+    # 
+    # Benefits over raw text parsing:
+    # - No need for complex regex post-processing
+    # - Guaranteed parseable output (no hallucinated markdown/formatting)
+    # - Type safety at LLM level
+    json_schema = {
+        'type': 'object',
+        'properties': {
+            'action_items': {
+                'type': 'array',
+                'items': {'type': 'string'},
+                'description': 'List of extracted action items as clean strings'
+            }
+        },
+        'required': ['action_items']
+    }
+    
+    # -------------------------------------------------------------------------
+    # Step 3: Call Ollama API with structured outputs
+    # -------------------------------------------------------------------------
+    try:
+        print(f"🔄 [extract_action_items_llm] Calling Ollama API...")
+        response = chat(
+            model=model,
+            messages=[
+                {'role': 'system', 'content': system_prompt},
+                {'role': 'user', 'content': f"Extract action items from these notes:\n\n{text}"}
+            ],
+            format=json_schema,  # ← Key feature: enforce JSON structure
+            options={
+                'temperature': 0.3,  # Lower temperature = more deterministic output
+            }
+        )
+        
+        # -------------------------------------------------------------------------
+        # Step 4: Parse and validate response
+        # -------------------------------------------------------------------------
+        # Even with structured outputs, we validate defensively
+        raw_content = response['message']['content']
+        print(f"📦 [extract_action_items_llm] Raw LLM response: {raw_content[:200]}...")
+        
+        parsed = json.loads(raw_content)
+        items = parsed.get('action_items', [])
+        
+        # Type check: ensure all items are strings
+        if not isinstance(items, list) or not all(isinstance(item, str) for item in items):
+            print("❌ [extract_action_items_llm] Invalid response format, falling back to empty list")
+            return []
+        
+        # -------------------------------------------------------------------------
+        # Step 5: Post-process for consistency
+        # -------------------------------------------------------------------------
+        # Clean up whitespace and deduplicate (LLMs sometimes repeat)
+        cleaned = [item.strip() for item in items if item.strip()]
+        
+        # Deduplicate while preserving order
+        seen: set[str] = set()
+        unique: List[str] = []
+        for item in cleaned:
+            lowered = item.lower()
+            if lowered not in seen:
+                seen.add(lowered)
+                unique.append(item)
+        
+        print(f"✨ [extract_action_items_llm] Extracted {len(unique)} unique action item(s)")
+        for i, item in enumerate(unique, 1):
+            print(f"  {i}. {item}")
+        
+        return unique
+        
+    except Exception as e:
+        # Graceful degradation: log error but don't crash the app
+        print(f"❌ [extract_action_items_llm] Error calling LLM: {type(e).__name__}: {e}")
+        print("🔄 [extract_action_items_llm] Falling back to empty list")
+        return []
