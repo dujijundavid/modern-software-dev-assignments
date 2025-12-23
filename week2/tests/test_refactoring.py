@@ -138,10 +138,10 @@ def test_db_list_action_items_returns_dicts():
 # ============================================================================
 
 def test_db_get_note_nonexistent_returns_none():
-    """Test that get_note returns None for non-existent ID."""
+    """Test that get_note raises NotFoundError for non-existent ID."""
     db.init_db()
-    result = db.get_note(999999)  # Very unlikely to exist
-    assert result is None
+    with pytest.raises(db.NotFoundError, match="note with id 999999 not found"):
+        db.get_note(999999)
 
 
 def test_db_error_handling_on_invalid_sql():

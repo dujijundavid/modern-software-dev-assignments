@@ -26,6 +26,11 @@ class NoteResponse(BaseModel):
     content: str
     created_at: str
 
+    @classmethod
+    def from_dict(cls, data: dict) -> "NoteResponse":
+        """Create NoteResponse from database dict."""
+        return cls(**data)
+
 
 # ============================================================================
 # Action Item Schemas
@@ -38,6 +43,17 @@ class ActionItemResponse(BaseModel):
     note_id: Optional[int] = None
     done: bool = False
     created_at: str
+
+    @classmethod
+    def from_dict(cls, data: dict) -> "ActionItemResponse":
+        """Create ActionItemResponse from database dict."""
+        return cls(
+            id=data["id"],
+            text=data["text"],
+            note_id=data.get("note_id"),
+            done=bool(data["done"]),
+            created_at=data["created_at"],
+        )
 
 
 # ============================================================================

@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import List, Optional
 import logging
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 
 from .. import db
 from ..services.extract import extract_action_items, extract_action_items_llm
@@ -40,17 +40,11 @@ def extract(payload: ExtractRequest) -> ExtractResponse:
     created_items = db.list_action_items(note_id=note_id)
     # Filter to only the items we just created (by ID)
     created_items_map = {item["id"]: item for item in created_items}
-    
+
     return ExtractResponse(
         note_id=note_id,
         items=[
-            ActionItemResponse(
-                id=item_id,
-                text=created_items_map[item_id]["text"],
-                note_id=created_items_map[item_id]["note_id"],
-                done=bool(created_items_map[item_id]["done"]),
-                created_at=created_items_map[item_id]["created_at"],
-            )
+            ActionItemResponse.from_dict(created_items_map[item_id])
             for item_id in ids
         ],
     )
@@ -60,16 +54,7 @@ def extract(payload: ExtractRequest) -> ExtractResponse:
 def list_all(note_id: Optional[int] = None) -> List[ActionItemResponse]:
     """List all action items, optionally filtered by note_id."""
     rows = db.list_action_items(note_id=note_id)
-    return [
-        ActionItemResponse(
-            id=r["id"],
-            note_id=r["note_id"],
-            text=r["text"],
-            done=bool(r["done"]),
-            created_at=r["created_at"],
-        )
-        for r in rows
-    ]
+    return [ActionItemResponse.from_dict(r) for r in rows]
 
 
 # TODO 4: New LLM-powered extraction endpoint
@@ -91,17 +76,11 @@ def extract_llm(payload: ExtractRequest) -> ExtractResponse:
     # Fetch the actual action items from DB to get created_at timestamps
     created_items = db.list_action_items(note_id=note_id)
     created_items_map = {item["id"]: item for item in created_items}
-    
+
     return ExtractResponse(
         note_id=note_id,
         items=[
-            ActionItemResponse(
-                id=item_id,
-                text=created_items_map[item_id]["text"],
-                note_id=created_items_map[item_id]["note_id"],
-                done=bool(created_items_map[item_id]["done"]),
-                created_at=created_items_map[item_id]["created_at"],
-            )
+            ActionItemResponse.from_dict(created_items_map[item_id])
             for item_id in ids
         ],
     )

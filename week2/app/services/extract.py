@@ -177,13 +177,13 @@ def extract_action_items_llm(text: str, model: str = "llama3.1:8b") -> List[str]
         >>> extract_action_items_llm(notes)
         ['Fix bug #123', 'Write tests']
     """
-    # DEBUG: Log input for traceability
-    print(f"\n🤖 [extract_action_items_llm] Using model: {model}")
-    print(f"📝 [extract_action_items_llm] Input text (first 100 chars): {text[:100]}...")
+    # TODO 3: Use logging instead of print for production
+    logger.info(f"LLM extraction using model: {model}")
+    logger.debug(f"Input text (first 100 chars): {text[:100]}...")
     
     # Edge case: Handle empty or whitespace-only input
     if not text or not text.strip():
-        print("⚠️  [extract_action_items_llm] Empty input, returning empty list")
+        logger.warning("Empty input, returning empty list")
         return []
     
     # -------------------------------------------------------------------------
@@ -235,7 +235,7 @@ Return only the action items as a JSON array of strings."""
     # Step 3: Call Ollama API with structured outputs
     # -------------------------------------------------------------------------
     try:
-        print(f"🔄 [extract_action_items_llm] Calling Ollama API...")
+        logger.debug("Calling Ollama API...")
         response = chat(
             model=model,
             messages=[
@@ -244,7 +244,7 @@ Return only the action items as a JSON array of strings."""
             ],
             format=json_schema,  # ← Key feature: enforce JSON structure
             options={
-                'temperature': 0.3,  # Lower temperature = more deterministic output
+                'temperature': 0.1,  # TODO: Improved - Very low for consistency
             }
         )
         
@@ -253,21 +253,33 @@ Return only the action items as a JSON array of strings."""
         # -------------------------------------------------------------------------
         # Even with structured outputs, we validate defensively
         raw_content = response['message']['content']
-        print(f"📦 [extract_action_items_llm] Raw LLM response: {raw_content[:200]}...")
+        logger.debug(f"Raw LLM response: {raw_content[:200]}...")
         
         parsed = json.loads(raw_content)
         items = parsed.get('action_items', [])
         
         # Type check: ensure all items are strings
         if not isinstance(items, list) or not all(isinstance(item, str) for item in items):
-            print("❌ [extract_action_items_llm] Invalid response format, falling back to empty list")
+            logger.error("Invalid response format from LLM")
             return []
         
         # -------------------------------------------------------------------------
-        # Step 5: Post-process for consistency
+        # Step 5: Post-process for consistency + quality filtering
         # -------------------------------------------------------------------------
-        # Clean up whitespace and deduplicate (LLMs sometimes repeat)
-        cleaned = [item.strip() for item in items if item.strip()]
+        # TODO: Improved - Filter out ambiguous single-word items
+        cleaned = []
+        for item in items:
+            item = item.strip()
+            if not item:
+                continue
+            
+            # Filter out vague single words (e.g., "help", "fix", "do")
+            words = item.split()
+            if len(words) == 1 and len(item) < 6:
+                logger.debug(f"Filtered vague item: '{item}'")
+                continue
+            
+            cleaned.append(item)
         
         # Deduplicate while preserving order
         seen: set[str] = set()
@@ -278,14 +290,13 @@ Return only the action items as a JSON array of strings."""
                 seen.add(lowered)
                 unique.append(item)
         
-        print(f"✨ [extract_action_items_llm] Extracted {len(unique)} unique action item(s)")
-        for i, item in enumerate(unique, 1):
-            print(f"  {i}. {item}")
+        logger.info(f"LLM extracted {len(unique)} action item(s)")
+        logger.debug(f"Items: {unique}")
         
         return unique
         
     except Exception as e:
         # Graceful degradation: log error but don't crash the app
-        print(f"❌ [extract_action_items_llm] Error calling LLM: {type(e).__name__}: {e}")
-        print("🔄 [extract_action_items_llm] Falling back to empty list")
+        logger.error(f"Error calling LLM: {type(e).__name__}: {e}")
+        logger.debug("Falling back to empty list")
         return []
