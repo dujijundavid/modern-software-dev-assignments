@@ -20,6 +20,14 @@ def create_note(payload: NoteCreate) -> NoteResponse:
     return NoteResponse.from_dict(note)
 
 
+# TODO 4: List Notes endpoint for Agentic Mode
+@router.get("", response_model=List[NoteResponse])
+def list_notes() -> List[NoteResponse]:
+    """List all notes ordered by ID (newest first)."""
+    rows = db.list_notes()
+    return [NoteResponse.from_dict(row) for row in rows]
+
+
 @router.get("/{note_id}", response_model=NoteResponse)
 def get_single_note(note_id: int) -> NoteResponse:
     """Get a single note by ID."""

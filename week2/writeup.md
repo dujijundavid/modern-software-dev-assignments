@@ -133,38 +133,136 @@ Key Learning Points:
 ```
 
 ### Exercise 3: Refactor Existing Code for Clarity
-Prompt: 
+Prompt:
 ```
-TODO
-``` 
+I need to refactor the week2 FastAPI application to improve code quality and maintainability.
+
+Refactoring Goals:
+1. Add Pydantic schemas for all API contracts (requests/responses)
+2. Change database layer to return dicts instead of sqlite3.Row for better decoupling
+3. Add proper error handling with custom exceptions
+4. Implement logging throughout the application
+5. Add type safety and validation
+
+Areas to refactor:
+- app/schemas.py: Add all Pydantic models (NoteCreate, NoteResponse, ExtractRequest, ExtractResponse, ActionItemResponse, MarkDoneRequest)
+- app/db.py: Wrap sqlite3 operations with error handling, return dicts instead of Row
+- app/routers/: Update all endpoints to use schemas
+- app/main.py: Add exception handlers for custom errors
+
+The refactoring should maintain backward compatibility with existing functionality while improving code quality.
+```
 
 Generated/Modified Code Snippets:
 ```
-TODO: List all modified code files with the relevant line numbers. (We anticipate there may be multiple scattered changes here – just produce as comprehensive of a list as you can.)
+Created file: week2/app/schemas.py (82 lines)
+- NoteCreate: Request schema with content validation (min_length=1)
+- NoteResponse: Response schema with id, content, created_at + from_dict() class method
+- ActionItemResponse: Response schema with id, text, note_id, done, created_at + from_dict()
+- ExtractRequest: Request schema for extraction (text, save_note with defaults)
+- ExtractResponse: Response schema containing note_id and list of ActionItemResponse
+- MarkDoneRequest: Request schema for marking items done/undone
+
+Modified file: week2/app/db.py (243 lines)
+- Added custom exceptions: DatabaseError (line 38), NotFoundError (line 59)
+- Added logger configuration (line 30)
+- Modified insert_note() (lines 122-135): Wrapped in try/except with DatabaseError handling
+- Modified list_notes() (lines 138-151): Now returns list[dict] instead of list[sqlite3.Row]
+- Modified get_note() (lines 154-173): Returns dict, raises NotFoundError if not found
+- Modified insert_action_items() (lines 176-195): Added error handling with DatabaseError
+- Modified list_action_items() (lines 198-219): Returns list[dict] with proper error handling
+- Modified mark_action_item_done() (lines 222-240): Raises NotFoundError if item not found
+
+Modified file: week2/app/main.py (47 lines)
+- Added exception handlers for DatabaseError (lines 25-29) and NotFoundError (lines 31-38)
+- Handlers return proper HTTP status codes (500 for DatabaseError, 404 for NotFoundError)
+- Added structured logging configuration (lines 7-10)
+
+Modified file: week2/app/routers/notes.py (36 lines)
+- Updated create_note() to use NoteCreate/NoteResponse schemas (lines 15-20)
+- Added list_notes() endpoint using NoteResponse schema (lines 24-28)
+- Updated get_single_note() to use NoteResponse schema (lines 31-35)
+
+Modified file: week2/app/routers/action_items.py (97 lines)
+- Updated extract() to use ExtractRequest/ExtractResponse schemas (lines 15-30)
+- Added extract_llm() endpoint with LLM integration (lines 33-57)
+- Updated mark_done() to use MarkDoneRequest schema (lines 60-75)
+- Added list_all() endpoint returning ActionItemResponse list (lines 78-87)
+
+Created file: week2/tests/test_refactoring.py (334 lines)
+- 17 comprehensive tests validating all refactoring improvements
+- Tests for schema validation, database dict returns, error handling, router integration
+- Full workflow end-to-end test
+
+Test Results:
+- All 17 refactoring tests passing in ~0.19 seconds
+- All existing functionality preserved with improved type safety
 ```
 
 
 ### Exercise 4: Use Agentic Mode to Automate a Small Task
-Prompt: 
+Prompt:
 ```
-TODO
-``` 
+I need to complete TODO 4 in the week2 assignment: Use Agentic Mode to add a "List Notes" feature.
+
+Requirements:
+1. Add a GET /notes endpoint to app/routers/notes.py that lists all notes
+2. Add a "List Notes" button to the frontend (frontend/index.html)
+3. Implement JavaScript to fetch and display notes when the button is clicked
+
+The endpoint should:
+- Use the existing db.list_notes() function
+- Return NoteResponse objects with proper typing
+- Order notes by ID descending (newest first)
+
+The frontend should:
+- Add a button next to the existing "Extract" buttons
+- Display notes in a readable format with ID, timestamp, and content
+- Handle empty state when no notes exist
+- Handle errors gracefully
+```
 
 Generated Code Snippets:
 ```
-TODO: List all modified code files with the relevant line numbers.
+Modified file: week2/app/routers/notes.py (lines 24-28)
+- Added list_notes() endpoint with @router.get("", response_model=List[NoteResponse])
+- Uses existing db.list_notes() function
+- Returns list of NoteResponse objects ordered by ID descending
+
+Modified file: week2/frontend/index.html (lines 28, 76-102)
+- Added "List Notes" button in the button row (line 28)
+- Added btnListNotes reference (line 76)
+- Added click event listener with async fetch to /notes endpoint (lines 82-102)
+- Displays notes with ID, timestamp, and content in styled cards
+- Handles empty state with "No notes found" message
+- Handles errors with "Error loading notes" message
 ```
 
 
 ### Exercise 5: Generate a README from the Codebase
-Prompt: 
+Prompt:
 ```
-TODO
-``` 
+Generate a comprehensive README.md for the week2 Action Item Extractor application.
+
+The README should include:
+1. Project title and brief description
+2. Features overview (rules-based extraction, LLM extraction, notes management)
+3. Tech stack (FastAPI, SQLite, Ollama, Pydantic)
+4. Project structure/directory layout
+5. Setup and installation instructions
+6. Usage examples (API endpoints, frontend UI)
+7. Running tests
+8. Configuration (Ollama setup, model requirements)
+
+Make it clear, well-organized, and suitable for someone new to the project.
+```
 
 Generated Code Snippets:
 ```
-TODO: List all modified code files with the relevant line numbers.
+Created file: week2/README.md
+- Complete project documentation with all required sections
+- Includes setup instructions, API documentation, testing guide
+- See week2/README.md for full content
 ```
 
 

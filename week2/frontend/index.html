@@ -25,6 +25,7 @@
       <label class="row"><input id="save_note" type="checkbox" checked /> Save as note</label>
       <button id="extract">Extract (Rules)</button>
       <button id="extract_llm">Extract (LLM)</button>
+      <button id="list_notes">List Notes</button>
     </div>
 
     <div class="items" id="items"></div>
@@ -72,9 +73,33 @@
       // TODO 4: Button event listeners
       const btnRules = $('#extract');
       const btnLLM = $('#extract_llm');
-      
+      const btnListNotes = $('#list_notes');
+
       btnRules.addEventListener('click', () => extractItems('/action-items/extract'));
       btnLLM.addEventListener('click', () => extractItems('/action-items/extract-llm'));
+
+      // TODO 4: List Notes button functionality
+      btnListNotes.addEventListener('click', async () => {
+        itemsEl.textContent = 'Loading notes...';
+        try {
+          const res = await fetch('/notes');
+          if (!res.ok) throw new Error('Request failed');
+          const notes = await res.json();
+          if (!notes || notes.length === 0) {
+            itemsEl.innerHTML = '<p class="muted">No notes found.</p>';
+            return;
+          }
+          itemsEl.innerHTML = '<h3>Saved Notes:</h3>' + notes.map(note => (
+            `<div class="item" style="align-items: flex-start; flex-direction: column; gap: 0.25rem; padding: 0.5rem; background: #f9fafb; border-radius: 4px;">
+              <div style="font-size: 0.875rem; color: #6b7280;">Note ID: ${note.id} | ${note.created_at}</div>
+              <div style="white-space: pre-wrap;">${note.content}</div>
+            </div>`
+          )).join('');
+        } catch (err) {
+          console.error(err);
+          itemsEl.textContent = 'Error loading notes';
+        }
+      });
 
     </script>
   </body>
