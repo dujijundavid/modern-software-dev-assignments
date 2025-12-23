@@ -17,13 +17,14 @@
   </head>
   <body>
     <h1>Action Item Extractor</h1>
-    <p class="muted">Paste notes and extract actionable items. Minimal raw HTML frontend.</p>
+    <p class="muted">Paste notes and extract actionable items. Use bullets (-), checkboxes ([ ]), or keywords (todo:, action:).</p>
 
-    <label for="text">Notes</label>
-    <textarea id="text" placeholder="Paste notes here...&#10;e.g.&#10;- [ ] Set up database&#10;- Implement extract endpoint"></textarea>
+    <label for="text">Notes (must use bullets or keywords)</label>
+    <textarea id="text" placeholder="Paste notes here with format:&#10;- Set up database&#10;- [ ] Write tests&#10;* Deploy app&#10;todo: Review code"></textarea>
     <div class="row">
       <label class="row"><input id="save_note" type="checkbox" checked /> Save as note</label>
-      <button id="extract">Extract</button>
+      <button id="extract">Extract (Rules)</button>
+      <button id="extract_llm">Extract (LLM)</button>
     </div>
 
     <div class="items" id="items"></div>
@@ -31,13 +32,14 @@
     <script>
       const $ = (sel) => document.querySelector(sel);
       const itemsEl = $('#items');
-      const btn = $('#extract');
-      btn.addEventListener('click', async () => {
+      
+      // TODO 4: Extract function for both buttons
+      async function extractItems(endpoint) {
         const text = $('#text').value;
         const save = $('#save_note').checked;
         itemsEl.textContent = 'Extracting...';
         try {
-          const res = await fetch('/action-items/extract', {
+          const res = await fetch(endpoint, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ text, save_note: save }),
@@ -65,7 +67,14 @@
           console.error(err);
           itemsEl.textContent = 'Error extracting items';
         }
-      });
+      }
+      
+      // TODO 4: Button event listeners
+      const btnRules = $('#extract');
+      const btnLLM = $('#extract_llm');
+      
+      btnRules.addEventListener('click', () => extractItems('/action-items/extract'));
+      btnLLM.addEventListener('click', () => extractItems('/action-items/extract-llm'));
 
     </script>
   </body>

@@ -7,6 +7,10 @@ import json
 from typing import Any
 from ollama import chat
 from dotenv import load_dotenv
+import logging
+
+# TODO 3: Replaced print statements with proper logging
+logger = logging.getLogger(__name__)
 
 load_dotenv()
 
@@ -19,66 +23,97 @@ KEYWORD_PREFIXES = (
 
 
 def _is_action_line(line: str) -> bool:
+    """Check if a line looks like an action item based on format and content."""
     stripped = line.strip().lower()
     if not stripped:
         return False
-    if BULLET_PREFIX_PATTERN.match(stripped):
-        return True
-    if any(stripped.startswith(prefix) for prefix in KEYWORD_PREFIXES):
-        return True
-    if "[ ]" in stripped or "[todo]" in stripped:
-        return True
-    return False
+    
+    # Must have some format indicator
+    has_format = (
+        BULLET_PREFIX_PATTERN.match(stripped) or
+        any(stripped.startswith(prefix) for prefix in KEYWORD_PREFIXES) or
+        "[ ]" in stripped or "[todo]" in stripped
+    )
+    
+    if not has_format:
+        return False
+    
+    # TODO 3: Additional filtering - must look like actionable content
+    # Filter out non-actionable content
+    if len(stripped) < 3:  # Too short
+        return False
+    
+    # Remove format markers to check content
+    content = BULLET_PREFIX_PATTERN.sub("", stripped)
+    content = content.replace("[ ]", "").replace("[todo]", "").strip()
+    
+    # Filter out questions (likely not action items)
+    if content.endswith("?"):
+        return False
+    
+    # Filter out pure gibberish (too many repeated characters or symbols)
+    if len(set(content)) < 3:  # Less than 3 unique chars
+        return False
+    
+    # Filter out lines that are mostly symbols/punctuation
+    alpha_chars = sum(c.isalpha() or c.isspace() for c in content)
+    if len(content) > 0 and alpha_chars / len(content) < 0.5:
+        return False
+    
+    return True
 
 
 def extract_action_items(text: str) -> List[str]:
-    # DEBUG: Log input text
-    print(f"\n🔍 [extract_action_items] Input text (first 100 chars): {text[:100]}...")
+    """Extract action items using heuristic pattern matching.
+    
+    TODO 3: Replaced all print() statements with logger.debug() for cleaner production code.
+    """
+    logger.debug(f"Input text (first 100 chars): {text[:100]}...")
     
     lines = text.splitlines()
-    print(f"📝 [extract_action_items] Split into {len(lines)} line(s)")
+    logger.debug(f"Split into {len(lines)} line(s)")
     
     extracted: List[str] = []
     for idx, raw_line in enumerate(lines):
         line = raw_line.strip()
-        print(f"  ➜ Line {idx}: '{line}'")
+        logger.debug(f"Line {idx}: '{line}'")
         
         if not line:
-            print(f"    ⊘ Skipped: empty line")
+            logger.debug(f"  Skipped: empty line")
             continue
         
         if _is_action_line(line):
-            print(f"    ✅ Matched as action line")
+            logger.debug(f"  Matched as action line")
             cleaned = BULLET_PREFIX_PATTERN.sub("", line)
             cleaned = cleaned.strip()
             # Trim common checkbox markers
             cleaned = cleaned.removeprefix("[ ]").strip()
             cleaned = cleaned.removeprefix("[todo]").strip()
-            print(f"    📌 Cleaned result: '{cleaned}'")
+            logger.debug(f"  Cleaned result: '{cleaned}'")
             extracted.append(cleaned)
         else:
-            print(f"    ❌ Not an action line")
+            logger.debug(f"  Not an action line")
     
-    print(f"\n🎯 [extract_action_items] After pattern matching: {len(extracted)} item(s)")
+    logger.debug(f"After pattern matching: {len(extracted)} item(s)")
     
     # Fallback: if nothing matched, heuristically split into sentences and pick imperative-like ones
     if not extracted:
-        print(f"⚠️  [extract_action_items] No items found by pattern matching, trying imperative fallback...")
+        logger.debug(f"No items found by pattern matching, trying imperative fallback...")
         sentences = re.split(r"(?<=[.!?])\s+", text.strip())
-        print(f"   Split into {len(sentences)} sentence(s)")
+        logger.debug(f"Split into {len(sentences)} sentence(s)")
         for sent_idx, sentence in enumerate(sentences):
             s = sentence.strip()
             if not s:
-                print(f"    Sentence {sent_idx}: skipped (empty)")
+                logger.debug(f"  Sentence {sent_idx}: skipped (empty)")
                 continue
-            print(f"    Sentence {sent_idx}: '{s}'")
+            logger.debug(f"  Sentence {sent_idx}: '{s}'")
             if _looks_imperative(s):
-                print(f"      ✅ Looks imperative!")
+                logger.debug(f"    Looks imperative!")
                 extracted.append(s)
             else:
-                print(f"      ❌ Not imperative")
+                logger.debug(f"    Not imperative")
     
-    print(f"\n🔢 [extract_action_items] Before deduplication: {len(extracted)} item(s)")
+    logger.debug(f"Before deduplication: {len(extracted)} item(s)")
     
     # Deduplicate while preserving order
     seen: set[str] = set()
@@ -86,14 +121,13 @@ def extract_action_items(text: str) -> List[str]:
     for item in extracted:
         lowered = item.lower()
         if lowered in seen:
-            print(f"  🗑️  Duplicate removed: '{item}'")
+            logger.debug(f"  Duplicate removed: '{item}'")
             continue
         seen.add(lowered)
         unique.append(item)
     
-    print(f"✨ [extract_action_items] Final result: {len(unique)} unique item(s)")
-    for i, item in enumerate(unique, 1):
-        print(f"  {i}. {item}")
+    logger.info(f"Extracted {len(unique)} unique action item(s)")
+    logger.debug(f"Final items: {unique}")
     
     return unique
 

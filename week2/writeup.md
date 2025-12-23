@@ -89,9 +89,11 @@ Testing Strategy:
 
 Generated Code Snippets:
 ```
-Modified file: week2/tests/test_extract.py (lines 1-283)
-- Added import: unittest.mock.patch for mocking
-- Added import: extract_action_items_llm to test new function
+Modified file: week2/tests/test_extract.py (lines 1-287)
+- Import statement: from ..app.services.extract import extract_action_items, extract_action_items_llm
+  (Uses relative imports, recommended best practice for package-internal code)
+- Added import: unittest.mock.patch for mocking Ollama API calls
+- Added import: pytest for test markers
 
 Unit Tests (Mocked - Lines 26-135):
 - test_llm_extract_mock_success: Tests normal JSON parsing and list extraction
@@ -109,13 +111,25 @@ Edge Case Tests (Lines 259-276):
 
 Modified file: pyproject.toml (lines 37-43)
 - Added [tool.pytest.ini_options] section
-- Registered 'slow' marker to avoid warnings
-- Configured test discovery paths
+- Registered 'slow' marker to avoid pytest warnings
+- Configured test discovery paths and naming conventions
+
+Learning Notes Created:
+- learning_notes/week2/testing_llm_functions_guide.md
+  Comprehensive guide on Mock, Pytest decorators, assertions, and LLM testing best practices
+- learning_notes/week2/python_import_system_guide.md
+  Deep dive into Python's import system, sys.path, absolute vs relative imports, and when to use each
 
 Test Results:
-- 6 fast tests (mocked + edge cases) pass in <1 second
+- 7 fast tests (mocked + edge cases) pass in ~0.6-2.8 seconds
 - 2 slow tests (real LLM) require Ollama running
 - Can run fast tests only with: pytest -m "not slow"
+
+Key Learning Points:
+- Relative imports (from ..app...) are safer for package-internal code
+- @patch decorator enables fast unit tests by mocking external dependencies
+- Pytest automatically adds project root to sys.path, enabling imports to work
+- Semantic assertions (checking keywords) are better than exact matching for LLM tests
 ```
 
 ### Exercise 3: Refactor Existing Code for Clarity
