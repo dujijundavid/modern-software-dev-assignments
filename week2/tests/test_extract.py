@@ -335,7 +335,7 @@ def test_is_action_line_filters_gibberish(line, expected):
 
 @pytest.mark.parametrize("line,expected", [
     ("- @#$%^&", False),                   # Mostly symbols (line 61)
-    ("* !@#$ test", False),                # High symbol ratio
+    ("* !@#$ %^& test", False),            # High symbol ratio (< 50% alpha)
     ("1. ++++", False),                    # Only symbols
     ("- valid text", True),                # Valid alpha content
     ("* mix3d w0rds", True),               # Mixed alphanumeric

@@ -50,7 +50,7 @@ Modified file: week2/app/services/extract.py (lines 117-264)
 - Post-processing: whitespace cleaning, deduplication
 - Extensive debug logging for observability
 
-Test file created: week2/test_llm_manual.py
+Test file created: week2/tests/manual/manual_llm.py
 - 5 test cases covering: bullets, keywords, mixed format, empty input, no actions
 - All tests passing with expected behavior
 ```
