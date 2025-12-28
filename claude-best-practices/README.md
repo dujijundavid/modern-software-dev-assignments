@@ -15,7 +15,8 @@ claude-best-practices/
 │   └── 02-ai-engineering-principles.md # AI 工程核心原则
 │
 ├── project-patterns/            # 项目模式和实践
-│   └── 01-project-index-usage.md     # PROJECT_INDEX 使用指南
+│   ├── 01-project-index-usage.md     # PROJECT_INDEX 使用指南
+│   └── 02-subagent-system.md         # 子代理系统架构
 │
 └── learning-prompts/            # 学习 Prompts 集合
     └── README.md                    # 100+ 学习 prompts
@@ -66,7 +67,29 @@ Layer 4: Validation (质量验证)
 
 ---
 
-### 3. 掌握 AI 工程原则
+### 3. 理解子代理系统
+
+**阅读**: [project-patterns/02-subagent-system.md](project-patterns/02-subagent-system.md)
+
+**学习目标**：
+- 主代理与子代理的关系
+- 何时使用哪个子代理
+- 子代理协作模式
+- 如何定义新子代理
+
+**核心概念**：
+```
+主代理 (编排者)
+    ↓
+专业化子代理 (执行者)
+    ├─ fastapi-expert
+    ├─ python-testing-expert
+    └─ code-reviewer (必须)
+```
+
+---
+
+### 4. 掌握 AI 工程原则
 
 **阅读**: [prompt-engineering/02-ai-engineering-principles.md](prompt-engineering/02-ai-engineering-principles.md)
 
@@ -83,7 +106,7 @@ Sessions_BreakEven = Token_Creation / (Token_Full - Token_Index)
 
 ---
 
-### 4. 使用学习 Prompts
+### 5. 使用学习 Prompts
 
 **阅读**: [learning-prompts/README.md](learning-prompts/README.md)
 

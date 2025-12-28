@@ -62,3 +62,6 @@ htmlcov/
 
 # Local settings
 .claude/settings.local.json
+
+# Serena MCP server cache
+.serena/
