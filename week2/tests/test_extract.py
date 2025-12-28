@@ -252,6 +252,7 @@ def test_llm_extract_real_semantic_understanding():
 # EDGE CASE TESTS: Fast, cover boundary conditions
 # ============================================================================
 
+@pytest.mark.slow
 def test_llm_extract_edge_cases():
     """
     Test edge cases: empty input, whitespace-only, no action items.
@@ -284,3 +285,305 @@ def test_llm_extract_edge_cases():
 # markers = [
 #     "slow: marks tests as slow (deselect with '-m \"not slow\"')",
 # ]
+
+
+# ============================================================================
+# EDGE CASE TESTS: _is_action_line filtering logic (Lines 29, 44, 52, 56, 61)
+# ============================================================================
+
+from week2.app.services.extract import _is_action_line, _looks_imperative
+
+
+@pytest.mark.parametrize("line,expected", [
+    ("", False),                           # Empty line (line 29)
+    ("   ", False),                        # Whitespace only
+    ("\t\n", False),                       # Tab and newline
+    ("- a", False),                        # Too short (< 3 chars after strip, line 44)
+    ("* ab", False),                       # Too short
+    ("1. x", False),                       # Too short
+    ("TODO:", True),                       # Has format indicator and >= 3 chars
+    ("[ ]", False),                        # Checkbox with no content
+])
+def test_is_action_line_filters_short_lines(line, expected):
+    """Test that _is_action_line filters out very short lines (line 44)."""
+    assert _is_action_line(line) == expected
+
+
+@pytest.mark.parametrize("line,expected", [
+    ("- Is this a bug?", False),           # Question ending (line 52)
+    ("- Should we fix it?", False),        # Question ending
+    ("ACTION: What about testing?", False), # Question with keyword
+    ("* Can we deploy?", False),           # Question with asterisk
+    ("TODO: Review this?", False),         # Question after TODO
+])
+def test_is_action_line_filters_questions(line, expected):
+    """Test that _is_action_line filters out questions (line 52)."""
+    assert _is_action_line(line) == expected
+
+
+@pytest.mark.parametrize("line,expected", [
+    ("- aaa", False),                      # Too few unique chars (line 56)
+    ("* ???", False),                      # Only symbols
+    ("1. xxxxx", False),                   # Repeated chars
+    ("- abcdef", True),                    # Valid unique chars
+    ("* test", True),                      # Valid content
+])
+def test_is_action_line_filters_gibberish(line, expected):
+    """Test that _is_action_line filters out gibberish with < 3 unique chars (line 56)."""
+    assert _is_action_line(line) == expected
+
+
+@pytest.mark.parametrize("line,expected", [
+    ("- @#$%^&", False),                   # Mostly symbols (line 61)
+    ("* !@#$ test", False),                # High symbol ratio
+    ("1. ++++", False),                    # Only symbols
+    ("- valid text", True),                # Valid alpha content
+    ("* mix3d w0rds", True),               # Mixed alphanumeric
+    ("- normal task description", True),   # Normal content
+])
+def test_is_action_line_filters_symbol_heavy(line, expected):
+    """Test that _is_action_line filters lines with < 50% alpha chars (line 61)."""
+    assert _is_action_line(line) == expected
+
+
+@pytest.mark.parametrize("line,expected", [
+    ("Valid action item", False),          # No format indicator
+    ("- Valid action item", True),         # Has bullet
+    ("* Valid action item", True),         # Has asterisk
+    ("TODO: Valid action item", True),     # Has TODO prefix
+    ("1. Valid action item", True),        # Has number prefix
+    ("[ ] Valid action item", True),       # Has checkbox
+])
+def test_is_action_line_requires_format_indicator(line, expected):
+    """Test that _is_action_line requires some format indicator."""
+    assert _is_action_line(line) == expected
+
+
+# ============================================================================
+# EDGE CASE TESTS: Empty line skipping in main loop (Lines 82-83)
+# ============================================================================
+
+def test_extract_action_items_skips_empty_lines():
+    """Test that empty lines are skipped in the main loop (lines 82-83)."""
+    text = """
+    - Task 1
+
+    * Task 2
+
+
+    1. Task 3
+    """
+    items = extract_action_items(text)
+    assert len(items) == 3
+    assert "Task 1" in items
+    assert "Task 2" in items
+    assert "Task 3" in items
+
+
+def test_extract_action_items_handles_whitespace_only_lines():
+    """Test that whitespace-only lines are handled correctly."""
+    text = "- Task 1\n   \n\t \n- Task 2"
+    items = extract_action_items(text)
+    assert len(items) == 2
+
+
+# ============================================================================
+# EDGE CASE TESTS: Imperative fallback logic (Lines 101-114)
+# ============================================================================
+
+def test_extract_action_items_fallback_to_imperative():
+    """Test fallback logic when pattern matching fails (lines 101-114)."""
+    # Text without bullet patterns but with imperative sentences
+    text = "Fix the bug. Create a new feature. Write tests."
+    items = extract_action_items(text)
+
+    # Should extract imperative sentences via fallback
+    assert "Fix the bug" in items or "Fix the bug." in items
+    assert "Create a new feature" in items or "Create a new feature." in items
+    assert "Write tests" in items or "Write tests." in items
+
+
+def test_extract_action_items_fallback_ignores_non_imperative():
+    """Test that fallback ignores non-imperative sentences."""
+    text = "The meeting was productive. We should improve performance."
+    items = extract_action_items(text)
+
+    # Should not extract non-imperative sentences
+    assert len(items) == 0 or all("productive" not in item.lower() for item in items)
+
+
+def test_extract_action_items_fallback_with_mixed_content():
+    """Test fallback with mix of imperative and non-imperative sentences."""
+    text = "The bug needs fixing. Fix the authentication issue. Consider refactoring."
+    items = extract_action_items(text)
+
+    # Should extract imperative sentences
+    assert any("fix" in item.lower() and "authentication" in item.lower() for item in items)
+
+
+# ============================================================================
+# EDGE CASE TESTS: Deduplication behavior (Lines 124-125)
+# ============================================================================
+
+def test_extract_action_items_deduplicates_case_insensitive():
+    """Test that deduplication is case-insensitive."""
+    text = """
+    - Fix the bug
+    * FIX THE BUG
+    1. fix the bug
+    """
+    items = extract_action_items(text)
+
+    # Should deduplicate case-insensitively
+    assert len(items) == 1
+    assert "Fix the bug" in items
+
+
+def test_extract_action_items_preserves_order_on_dedup():
+    """Test that order is preserved during deduplication."""
+    text = """
+    - Task B
+    - Task A
+    - Task B
+    * Task C
+    - Task A
+    """
+    items = extract_action_items(text)
+
+    # Should preserve first occurrence order
+    assert items == ["Task B", "Task A", "Task C"]
+
+
+# ============================================================================
+# EDGE CASE TESTS: _looks_imperative function (Lines 136-155)
+# ============================================================================
+
+@pytest.mark.parametrize("sentence,expected", [
+    ("Fix the bug", True),                 # Starts with imperative verb
+    ("Create a new feature", True),
+    ("Implement the API", True),
+    ("Write tests", True),
+    ("Refactor the code", True),
+    ("Add logging", True),
+    ("Update documentation", True),
+    ("Check the configuration", True),
+    ("Verify the fix", True),
+    ("The bug needs fixing", False),       # Not imperative
+    ("We should fix it", False),           # Not imperative
+    ("The meeting was productive", False), # Not imperative
+    ("", False),                           # Empty
+    ("???", False),                        # No words
+    ("123 numbers", False),                # Starts with number
+    ("fixing the bug", False),             # Gerund, not imperative
+])
+def test_looks_imperative(sentence, expected):
+    """Test imperative sentence detection (lines 136-155)."""
+    assert _looks_imperative(sentence) == expected
+
+
+def test_looks_imperative_case_insensitive():
+    """Test that _looks_imperative is case-insensitive."""
+    assert _looks_imperative("Fix the bug") is True
+    assert _looks_imperative("fix the bug") is True
+    assert _looks_imperative("FIX THE BUG") is True
+
+
+# ============================================================================
+# EDGE CASE TESTS: Type validation for LLM responses (Lines 263-264)
+# ============================================================================
+
+@patch('week2.app.services.extract.chat')
+def test_llm_extract_type_validation_invalid_items(mock_chat):
+    """Test type validation when LLM returns non-string items (lines 263-264)."""
+    # Mock LLM returns invalid types
+    mock_chat.return_value = {
+        "message": {
+            "content": '{"action_items": [123, null, ["array"]]}'
+        }
+    }
+
+    result = extract_action_items_llm("test input")
+    assert result == [], "Should return empty list for non-string items"
+
+
+@patch('week2.app.services.extract.chat')
+def test_llm_extract_type_validation_not_a_list(mock_chat):
+    """Test type validation when action_items is not a list (lines 263-264)."""
+    mock_chat.return_value = {
+        "message": {
+            "content": '{"action_items": "not a list"}'
+        }
+    }
+
+    result = extract_action_items_llm("test input")
+    assert result == [], "Should return empty list for non-list"
+
+
+@patch('week2.app.services.extract.chat')
+def test_llm_extract_type_validation_missing_key(mock_chat):
+    """Test type validation when action_items key is missing."""
+    mock_chat.return_value = {
+        "message": {
+            "content": '{"wrong_key": ["item1", "item2"]}'
+        }
+    }
+
+    result = extract_action_items_llm("test input")
+    # Should handle gracefully - either empty list or default
+    assert isinstance(result, list)
+
+
+# ============================================================================
+# EDGE CASE TESTS: Vague single-word filtering (Lines 279-280)
+# ============================================================================
+
+@patch('week2.app.services.extract.chat')
+def test_llm_extract_filters_vague_single_words(mock_chat):
+    """Test filtering of vague single-word items (lines 279-280)."""
+    mock_chat.return_value = {
+        "message": {
+            "content": '{"action_items": ["fix", "help", "do", "Implement feature"]}'
+        }
+    }
+
+    result = extract_action_items_llm("test input")
+
+    # Should filter short vague words but keep substantive ones
+    assert "Implement feature" in result
+    assert "fix" not in result, "Should filter 'fix' (single short word)"
+    assert "help" not in result, "Should filter 'help' (single short word)"
+    assert "do" not in result, "Should filter 'do' (single short word)"
+
+
+@patch('week2.app.services.extract.chat')
+def test_llm_extract_keeps_substantive_single_words(mock_chat):
+    """Test that substantive single words are kept (lines 279-280)."""
+    mock_chat.return_value = {
+        "message": {
+            "content": '{"action_items": ["investigation", "refactoring", "implementation"]}'
+        }
+    }
+
+    result = extract_action_items_llm("test input")
+
+    # Words >= 6 chars should be kept
+    assert len(result) == 3
+    assert "investigation" in result
+    assert "refactoring" in result
+    assert "implementation" in result
+
+
+@patch('week2.app.services.extract.chat')
+def test_llm_extract_filters_empty_strings(mock_chat):
+    """Test that empty strings are filtered out."""
+    mock_chat.return_value = {
+        "message": {
+            "content": '{"action_items": ["Valid task", "", "  ", "Another task"]}'
+        }
+    }
+
+    result = extract_action_items_llm("test input")
+
+    assert len(result) == 2
+    assert "Valid task" in result
+    assert "Another task" in result
