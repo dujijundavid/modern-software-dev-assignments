@@ -16,10 +16,15 @@ claude-best-practices/
 │
 ├── project-patterns/            # 项目模式和实践
 │   ├── 01-project-index-usage.md     # PROJECT_INDEX 使用指南
-│   └── 02-subagent-system.md         # 子代理系统架构
+│   ├── 02-subagent-system.md         # 子代理系统架构
+│   ├── 03-claude-md-best-practices.md # CLAUDE.md 最佳实践
+│   ├── 04-skill-design-best-practices.md # MCP/Subagent Skill 设计
+│   └── 05-skills-system-guide.md     # Skills 系统完全指南 ⭐ NEW
 │
 └── learning-prompts/            # 学习 Prompts 集合
-    └── README.md                    # 100+ 学习 prompts
+    ├── README.md                    # 100+ 学习 prompts
+    ├── sc-pm-explained.md           # /sc:pm 深度解析
+    └── superclaude-architecture-analysis.md # SuperClaude 架构分析
 ```
 
 ---
@@ -106,7 +111,27 @@ Sessions_BreakEven = Token_Creation / (Token_Full - Token_Index)
 
 ---
 
-### 5. 使用学习 Prompts
+### 5. 理解 CLAUDE.md 最佳实践
+
+**阅读**: [project-patterns/03-claude-md-best-practices.md](project-patterns/03-claude-md-best-practices.md)
+
+**学习目标**：
+- CLAUDE.md 应该包含哪些部分？
+- 如何组织信息结构？
+- 如何定义 AI 团队角色？
+- 如何与 PROJECT_INDEX.json 配合？
+
+**核心框架**：
+```
+CLAUDE.md 三大功能
+├── 行为指南 (Behavior Guide) - AI 应该如何表现
+├── 结构映射 (Structure Map) - 项目架构和模式
+└── 工作流编排 (Workflow Orchestration) - 代理和命令使用
+```
+
+---
+
+### 6. 使用学习 Prompts
 
 **阅读**: [learning-prompts/README.md](learning-prompts/README.md)
 

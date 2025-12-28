@@ -21,7 +21,8 @@
       "Bash(poetry add:*)",
       "Bash(poetry run python:*)",
       "Bash(find:*)",
-      "Bash(xargs:*)"
+      "Bash(xargs:*)",
+      "Bash(cat:*)"
     ]
   },
   "enableAllProjectMcpServers": true

@@ -130,6 +130,9 @@
 请展示一个完整的工作流示例，从用户请求到完成。
 ```
 
+> 📘 **Deep Dive**: For a comprehensive English explanation of `/sc:pm`, see:
+> → [sc-pm-explained.md](./sc-pm-explained.md) - Complete guide with diagrams, code examples, and real workflow
+
 ### 3.3 /sc:implement 实现命令
 
 ```
