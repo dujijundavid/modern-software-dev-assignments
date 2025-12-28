@@ -63,5 +63,9 @@ htmlcov/
 # Local settings
 .claude/settings.local.json
 
-# Serena MCP server cache
-.serena/
+# Serena MCP server - share config/memories, exclude machine-specific cache
+!.serena/
+!.serena/.gitignore
+!.serena/project.yml
+!.serena/memories/
+.serena/cache/
