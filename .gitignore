@@ -52,3 +52,13 @@ Thumbs.db
 
 # Vercel
 .vercel/*
+
+# Coverage
+.coverage
+htmlcov/
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Local settings
+.claude/settings.local.json
