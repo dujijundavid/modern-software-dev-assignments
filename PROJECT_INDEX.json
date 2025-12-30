@@ -4,13 +4,34 @@
     "institution": "Stanford University",
     "term": "Fall 2025",
     "generated_at": "2025-12-30",
-    "index_version": "1.1",
+    "last_updated": "2025-12-30",
+    "index_version": "1.3",
     "poetry_version": "2.2.1",
     "token_efficiency": {
       "full_codebase_tokens": 58000,
       "index_tokens": 3000,
       "savings_percentage": 94
-    }
+    },
+    "changes": "Added file naming convention, updated claude-best-practices to 20+ guides, added writeup.md references"
+  },
+  "file_naming_convention": {
+    "updated": "2025-12-30",
+    "purpose": "AI agent clarity and context isolation",
+    "pattern": "week{N}_{type}.md",
+    "before": {
+      "assignment": "assignment.md (ambiguous)",
+      "writeup": "writeup.md (unclear association)"
+    },
+    "after": {
+      "assignment": "week1_assignment.md, week2_assignment.md, ...",
+      "writeup": "week2_writeup.md, week4_writeup.md, ..."
+    },
+    "benefits": [
+      "Precise file search with week prefix",
+      "Reduced noise in AI agent exploration",
+      "Better context isolation for learning",
+      "Faster file discovery in large codebases"
+    ]
   },
   "project_structure": {
     "root": "modern-software-dev-assignments/",
@@ -26,7 +47,7 @@
       "learning_notes": "Learning notes and prompt templates",
       ".claude": "Claude Code configuration and custom commands",
       ".serena": "Serena MCP integration with shared memories",
-      "claude-best-practices": "Best practices collection (12 guides)"
+      "claude-best-practices": "Best practices collection (20+ guides: setup, understand, create, deep-dive, serena-mcp)"
     },
     "weeks": [
       {
@@ -70,7 +91,8 @@
           {"name": "Notion MCP", "path": "server/main.py"},
           {"name": "Weather MCP", "path": "weather_server/weather.py"}
         ],
-        "tech_stack": ["MCP", "Notion API", "httpx"]
+        "tech_stack": ["MCP", "Notion API", "NWS API", "httpx", "FastMCP"],
+        "servers": 2
       },
       {
         "week": 4,
@@ -154,15 +176,21 @@
     },
     "claude_best_practices": {
       "root": "claude-best-practices/",
-      "learning_prompts": ["document-skills-guide.md", "sc-pm-explained.md", "superclaude-architecture-analysis.md"],
-      "project_patterns": [
-        "01-project-index-usage.md",
-        "02-subagent-system.md",
-        "03-claude-md-best-practices.md",
-        "04-skill-design-best-practices.md",
-        "05-skills-system-guide.md"
-      ],
-      "prompt_engineering": ["01-index-repo-analysis.md", "02-ai-engineering-principles.md"]
+      "readme": "claude-best-practices/README.md",
+      "structure": {
+        "01-setup": ["project-index-usage.md", "claude-md-best-practices.md", "skills-system-guide.md"],
+        "02-understand": ["subagent-system.md", "superclaude-architecture.md", "ai-engineering-principles.md"],
+        "03-create": ["skill-design-best-practices.md", "document-skills-guide.md"],
+        "04-deep-dive": ["sc-pm-explained.md", "index-repo-analysis.md", "context7-mcp-guide.md", "prompt-layer-design.md", "learning-prompts-collection.md"],
+        "serena-mcp": ["README.md", "01-architecture-overview.md", "02-configuration-guide.md", "03-memory-system-design.md", "04-cross-machine-sync.md", "05-advanced-patterns.md"]
+      },
+      "total_guides": "20+",
+      "learning_path": {
+        "day_1_3": ["01-setup/*"],
+        "day_4_7": ["02-understand/*"],
+        "day_8_14": ["serena-mcp/*"],
+        "day_15_plus": ["04-deep-dive/*"]
+      }
     }
   },
   "tech_stack": {
@@ -217,13 +245,14 @@
   },
   "statistics": {
     "week_folders": 8,
-    "python_files": 90,
-    "markdown_files": 70,
-    "test_files": 20,
-    "learning_notes": 25,
+    "python_files": "~90",
+    "markdown_files": "~110",
+    "test_files": "~20",
+    "learning_notes": "~30",
     "custom_commands": 7,
-    "claude_best_practices": 12,
-    "serena_memories": 13,
+    "claude_best_practices": "20+",
+    "serena_memories": 12,
+    "mcp_servers": 2,
     "code_coverage": 85
   },
   "key_resources": {

@@ -1,6 +1,7 @@
 # CS146S: Modern Software Developer - Project Index
 
 > Generated: 2025-12-30
+> Last Updated: 2025-12-30 (v1.3)
 > Course: Stanford CS146S Fall 2025
 > Goal: Train top-tier AI Engineers through 8-week intensive curriculum
 
@@ -20,6 +21,7 @@
 ```
 modern-software-dev-assignments/
 +-- week1/                    # Prompt Engineering 基础
+|   +-- week1_assignment.md   # Assignment spec (renamed for clarity)
 |   +-- k_shot_prompting.py
 |   +-- chain_of_thought.py
 |   +-- tool_calling.py
@@ -28,6 +30,8 @@ modern-software-dev-assignments/
 |   +-- self_consistency_prompting.py
 |
 +-- week2/                    # FastAPI + LLM 集成
+|   +-- week2_assignment.md   # Assignment spec (renamed)
+|   +-- week2_writeup.md      # Week summary (renamed)
 |   +-- app/
 |   |   +-- routers/          # API endpoints (action_items.py, notes.py)
 |   |   +-- services/         # Business logic (extract.py)
@@ -37,32 +41,43 @@ modern-software-dev-assignments/
 |   +-- tests/                # 6 test files (~85% coverage)
 |
 +-- week3/                    # MCP Server
-|   +-- server/main.py        # Notion MCP server
+|   +-- week3_assignment.md   # Assignment spec (renamed)
+|   +-- server/main.py        # Notion MCP server (450 lines)
 |   +-- weather_server/
-|       +-- weather.py        # Weather MCP server
+|       +-- weather.py        # Weather MCP server (FastMCP)
 |       +-- test_server.py
 |
 +-- week4/                    # Claude Code Automation
+|   +-- week4_assignment.md   # Assignment spec (renamed)
+|   +-- week4_writeup.md      # Week summary (renamed)
 |   +-- backend/              # FastAPI app (refactored)
 |   +-- frontend/             # Static UI
 |   +-- data/                 # SQLite + seed
 |   +-- docs/TASKS.md
 |
 +-- week5/                    # Warp Agentic Development
+|   +-- week5_assignment.md   # Assignment spec (renamed)
+|   +-- week5_writeup.md      # Week summary (renamed)
 |   +-- backend/              # FastAPI app
 |   +-- frontend/             # Static UI
 |   +-- docs/TASKS.md
 |
 +-- week6/                    # Security Analysis
+|   +-- week6_assignment.md   # Assignment spec (renamed)
+|   +-- week6_writeup.md      # Week summary (renamed)
 |   +-- backend/              # FastAPI app
 |   +-- frontend/             # Static UI
 |
 +-- week7/                    # AI Code Review
+|   +-- week7_assignment.md   # Assignment spec (renamed)
+|   +-- week7_writeup.md      # Week summary (renamed)
 |   +-- backend/              # FastAPI app
 |   +-- frontend/             # Static UI
 |   +-- docs/TASKS.md
 |
 +-- week8/                    # Multi-Stack Build
+|   +-- week8_assignment.md   # Assignment spec (renamed)
+|   +-- week8_writeup.md      # Week summary (renamed)
 |   +-- [3 tech stack versions]
 |
 +-- learning_notes/           # Learning notes treasure trove
@@ -75,18 +90,51 @@ modern-software-dev-assignments/
 |   +-- week3/                       # 3 files
 |   +-- prompts/                     # 8 prompt templates
 |
++-- claude-best-practices/    # Best practices collection (20+ guides)
+|   +-- README.md                  # Navigation hub (updated)
+|   +-- 01-setup/                  # Setup guides (3 files)
+|   |   +-- project-index-usage.md
+|   |   +-- claude-md-best-practices.md
+|   |   +-- skills-system-guide.md
+|   +-- 02-understand/             # Architecture guides (3 files)
+|   |   +-- subagent-system.md
+|   |   +-- superclaude-architecture.md
+|   |   +-- ai-engineering-principles.md
+|   +-- 03-create/                 # Creation guides (2 files)
+|   |   +-- skill-design-best-practices.md
+|   |   +-- document-skills-guide.md
+|   +-- 04-deep-dive/              # Deep dive guides (5 files)
+|   |   +-- sc-pm-explained.md
+|   |   +-- index-repo-analysis.md
+|   |   +-- context7-mcp-guide.md
+|   |   +-- prompt-layer-design.md
+|   |   +-- learning-prompts-collection.md
+|   +-- serena-mcp/                # Serena MCP guides (6 files)
+|       +-- README.md
+|       +-- 01-architecture-overview.md
+|       +-- 02-configuration-guide.md
+|       +-- 03-memory-system-design.md
+|       +-- 04-cross-machine-sync.md
+|       +-- 05-advanced-patterns.md
+|
 +-- .claude/                  # Claude Code configuration
-|   +-- commands/             # Custom slash commands
+|   +-- commands/             # Custom slash commands (7 files)
+|   |   +-- week.md           # /week - Weekly assignment help
+|   |   +-- explore-week.md   # /explore-week - Week analysis
+|   |   +-- test-week.md      # /test-week - Run tests
+|   |   +-- llm-extract.md    # /llm-extract - Week 2 helper
+|   |   +-- mcp-server.md     # /mcp-server - Week 3 helper
+|   |   +-- refactor.md       # /refactor - Code cleanup
+|   |   +-- review-pr.md      # /review-pr - PR review
 |   +-- SUBAGENT_GUIDE.md
 |
 +-- .serena/                  # Serena MCP integration
-|   +-- memories/             # Shared context across sessions
-|   +-- config.json           # MCP server settings
-|
-+-- claude-best-practices/    # Best practices collection
-|   +-- learning-prompts/     # Learning prompts guide
-|   +-- project-patterns/     # Project patterns (5 guides)
-|   +-- prompt-engineering/   # Prompt engineering guides
+|   +-- project.yml           # Serena project config
+|   +-- memories/             # Shared context (12 files)
+|       +-- weekly_assignments.md
+|       +-- architecture_decisions.md
+|       +-- tech_stack.md
+|       +-- llm_integration_patterns.md
 |
 +-- CLAUDE.md                 # AI configuration (with team config)
 +-- pyproject.toml            # Poetry 2.2.1 dependency management
@@ -103,7 +151,7 @@ modern-software-dev-assignments/
 |------|-------|-------------|-----------|-----------|
 | **1** | Prompt Engineering | K-shot, CoT, Tool Calling, RAG | Ollama, JSON Schema | [week1/*.py](week1/) |
 | **2** | LLM-Powered Apps | FastAPI + LLM Integration | FastAPI, SQLAlchemy, Ollama | [week2/app/services/extract.py](week2/app/services/extract.py) |
-| **3** | MCP Server | Model Context Protocol | MCP, Notion API | [week3/server/main.py](week3/server/main.py) |
+| **3** | MCP Server | Model Context Protocol | MCP, Notion/NWS API | [week3/server/main.py](week3/server/main.py) (Notion), [week3/weather_server/weather.py](week3/weather_server/weather.py) (Weather) |
 | **4** | Claude Code | Automation Workflows | Slash Commands, SubAgents | [.claude/commands/*](.claude/commands/) |
 | **5** | Warp Dev | Multi-AI Collaboration | Warp Drive, Multi-Agent | [week5/docs/TASKS.md](week5/docs/TASKS.md) |
 | **6** | Security | SAST/SCA Analysis | Semgrep | [week6/backend/](week6/backend/) |
@@ -117,6 +165,25 @@ modern-software-dev-assignments/
                     AI-Human Collaborative Dev     (Week 4-7)
                     Prompt Engineering Basics       (Week 1-2)
 ```
+
+---
+
+## File Naming Convention (Updated 2025-12-30)
+
+**Before**: Generic names caused confusion
+- `assignment.md` → ambiguous which week
+- `writeup.md` → unclear association
+
+**After**: Week-prefixed for clarity
+- `week1_assignment.md` - Clear week association
+- `week2_writeup.md` - Easy identification
+- `week3_assignment.md` - Targeted file discovery
+
+**Benefits for AI Agents**:
+- ✅ Precise file search: `week4_assignment.md` vs `assignment.md`
+- ✅ Reduced noise when exploring specific weeks
+- ✅ Better context isolation for learning
+- ✅ Faster file discovery in large codebases
 
 ---
 
@@ -167,6 +234,77 @@ modern-software-dev-assignments/
 | 04_note_generation.md | Note generation (summary) |
 | 05_spaced_review.md | Spaced repetition (periodic) |
 | 06_mini_project.md | Project-based learning (deep) |
+
+---
+
+## Claude Best Practices Collection
+
+**Location**: [claude-best-practices/](claude-best-practices/)
+**Updated**: 2025-12-30
+**Purpose**: Comprehensive guide for Claude Code and SuperClaude mastery
+
+### Navigation Structure
+
+```
+claude-best-practices/
+├── README.md                      # 🎯 Navigation hub (start here!)
+│
+├── 01-setup/                      # 【我要配置项目】
+│   ├── project-index-usage.md     # 94% token savings
+│   ├── claude-md-best-practices.md # AI behavior config
+│   └── skills-system-guide.md     # Extend AI capabilities
+│
+├── 02-understand/                 # 【我要理解系统】
+│   ├── subagent-system.md         # Subagent delegation
+│   ├── superclaude-architecture.md # Overall architecture
+│   └── ai-engineering-principles.md # ROI, token optimization
+│
+├── 03-create/                     # 【我要创建/开发】
+│   ├── skill-design-best-practices.md # Create custom skills
+│   └── document-skills-guide.md   # Use document skills
+│
+├── 04-deep-dive/                  # 【我要深入学习】
+│   ├── sc-pm-explained.md         # /sc:pm analysis
+│   ├── index-repo-analysis.md     # /sc:index-repo deep dive
+│   ├── context7-mcp-guide.md      # Context7 integration
+│   ├── prompt-layer-design.md     # Prompt layer design
+│   └── learning-prompts-collection.md # 100+ prompts
+│
+└── serena-mcp/                    # 【Serena MCP 系统】
+    ├── README.md                  # Serena overview
+    ├── 01-architecture-overview.md
+    ├── 02-configuration-guide.md
+    ├── 03-memory-system-design.md
+    ├── 04-cross-machine-sync.md
+    └── 05-advanced-patterns.md
+```
+
+### Key Concepts Covered
+
+| Topic | Files | Focus |
+|-------|-------|-------|
+| **Setup** | 3 files | Configuration, indexing, skills |
+| **Architecture** | 3 files | Subagents, system design, principles |
+| **Creation** | 2 files | Skill design, document processing |
+| **Deep Dive** | 5 files | Command internals, MCP integration |
+| **Serena** | 6 files | Memory system, cross-machine sync |
+
+### Learning Path
+
+**Day 1-3**: Setup & Configuration
+1. [project-index-usage.md](claude-best-practices/01-setup/project-index-usage.md) - Token efficiency
+2. [claude-md-best-practices.md](claude-best-practices/01-setup/claude-md-best-practices.md) - AI behavior
+3. [skills-system-guide.md](claude-best-practices/01-setup/skills-system-guide.md) - Custom skills
+
+**Day 4-7**: Understanding System
+1. [subagent-system.md](claude-best-practices/02-understand/subagent-system.md) - Delegation
+2. [superclaude-architecture.md](claude-best-practices/02-understand/superclaude-architecture.md) - Architecture
+3. [ai-engineering-principles.md](claude-best-practices/02-understand/ai-engineering-principles.md) - ROI
+
+**Day 8-14**: Serena Mastery
+1. [README.md](claude-best-practices/serena-mcp/README.md) - Overview
+2. [02-configuration-guide.md](claude-best-practices/serena-mcp/02-configuration-guide.md) - Configuration
+3. [03-memory-system-design.md](claude-best-practices/serena-mcp/03-memory-system-design.md) - Memory
 
 ---
 
@@ -304,6 +442,7 @@ make run  # or python -m uvicorn app.main:app --reload
 | Week 2 Example | [learning_notes/week2/_archive/WEEK2_LEARNING_SUMMARY.md](learning_notes/week2/_archive/WEEK2_LEARNING_SUMMARY.md) | Note template |
 | AI Config | [CLAUDE.md](CLAUDE.md) | AI team config |
 | Serena Config | [.serena/](.serena/) | MCP integration |
+| Claude Best Practices | [claude-best-practices/README.md](claude-best-practices/README.md) | System guides |
 
 ### External Resources
 
@@ -322,12 +461,13 @@ make run  # or python -m uvicorn app.main:app --reload
 |--------|-------|
 | **Week folders** | 8 |
 | **Python files** | ~90 |
-| **Markdown docs** | ~70 |
+| **Markdown docs** | ~110 |
 | **Test files** | ~20 |
-| **Learning notes** | ~25 |
+| **Learning notes** | ~30 |
 | **Custom commands** | 7 |
-| **Claude best practices** | 12 |
-| **Serena memories** | 10 |
+| **Claude best practices** | 20+ |
+| **Serena memories** | 12 |
+| **MCP servers** | 2 (Notion, Weather) |
 
 ---
 
@@ -336,16 +476,18 @@ make run  # or python -m uvicorn app.main:app --reload
 ### For AI Agents
 
 1. **Read this index first** - Understand structure before coding
-2. **Use `/week` command** - Get week-specific context
-3. **Use `code-reviewer`** - Before any commits
-4. **Use `/test-week`** - Run tests before finishing
+2. **Use week-specific files** - `week4_assignment.md` is more precise than `assignment.md`
+3. **Use `/week` command** - Get week-specific context
+4. **Use `code-reviewer`** - Before any commits
+5. **Use `/test-week`** - Run tests before finishing
 
 ### For Learners
 
 1. **Follow BPRT cycle** - Build → Prompt → Reflect → Teach
 2. **Reference Week 2 notes** - Best example of learning notes
 3. **Use prompt templates** - In [learning_notes/prompts/](learning_notes/prompts/)
-4. **Generate summaries** - After each week
+4. **Explore Claude best practices** - In [claude-best-practices/README.md](claude-best-practices/README.md)
+5. **Generate summaries** - After each week
 
 ---
 
@@ -362,11 +504,12 @@ make run  # or python -m uvicorn app.main:app --reload
 
 1. Explore [.claude/commands/](.claude/commands/) custom commands
 2. Read [SUBAGENT_GUIDE.md](.claude/SUBAGENT_GUIDE.md) for subagents
-3. Use prompt templates for deep learning
+3. Use [claude-best-practices/](claude-best-practices/) for deep learning
 4. Review periodically (every 2-3 weeks with Prompt 5)
 
 ---
 
-**Index Version:** 1.1
+**Index Version:** 1.3
 **Last Updated:** 2025-12-30
+**Changes**: Added file naming convention, updated claude-best-practices section, added writeup.md references
 **Maintained by:** AI Agent (Claude Code)
