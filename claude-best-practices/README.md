@@ -51,6 +51,20 @@
 
 ---
 
+### 我想掌握 Serena → [serena-mcp/](serena-mcp/)
+**任务**：深入理解 Serena AI 项目内存系统
+
+| 文件 | 说明 | 关键收益 |
+|------|------|---------|
+| [README.md](serena-mcp/README.md) | Serena 概览和导航 | 快速开始指南 |
+| [01-architecture-overview.md](serena-mcp/01-architecture-overview.md) | 架构概览 | 系统组件详解 |
+| [02-configuration-guide.md](serena-mcp/02-configuration-guide.md) | 配置完全指南 | project.yml 参考 |
+| [03-memory-system-design.md](serena-mcp/03-memory-system-design.md) | 内存系统设计 | 记忆组织策略 |
+| [04-cross-machine-sync.md](serena-mcp/04-cross-machine-sync.md) | 跨机器协作 | Git 共享策略 |
+| [05-advanced-patterns.md](serena-mcp/05-advanced-patterns.md) | 高级模式技巧 | MCP 工具集成 |
+
+---
+
 ## 文件夹结构
 
 ```
@@ -71,10 +85,18 @@ claude-best-practices/
 │   ├── skill-design-best-practices.md
 │   └── document-skills-guide.md
 │
-└── 04-deep-dive/                  # 【我要深入学习】
-    ├── sc-pm-explained.md
-    ├── index-repo-analysis.md
-    └── learning-prompts-collection.md
+├── 04-deep-dive/                  # 【我要深入学习】
+│   ├── sc-pm-explained.md
+│   ├── index-repo-analysis.md
+│   └── learning-prompts-collection.md
+│
+└── serena-mcp/                    # 【Serena MCP 系统】
+    ├── README.md
+    ├── 01-architecture-overview.md
+    ├── 02-configuration-guide.md
+    ├── 03-memory-system-design.md
+    ├── 04-cross-machine-sync.md
+    └── 05-advanced-patterns.md
 ```
 
 ---
@@ -95,10 +117,16 @@ claude-best-practices/
 1. [Skill 设计最佳实践](03-create/skill-design-best-practices.md) - 创建自定义技能
 2. [Document Skills 指南](03-create/document-skills-guide.md) - 使用文档技能
 
-### Day 11+: 深入学习
+### Day 11-14: 掌握 Serena
+1. [Serena 架构概览](serena-mcp/01-architecture-overview.md) - 理解系统架构
+2. [Serena 配置指南](serena-mcp/02-configuration-guide.md) - 配置 project.yml
+3. [内存系统设计](serena-mcp/03-memory-system-design.md) - 组织项目记忆
+
+### Day 15+: 深入学习
 1. [/sc:pm 深度解析](04-deep-dive/sc-pm-explained.md) - 项目管理代理
 2. [/sc:index-repo 分析](04-deep-dive/index-repo-analysis.md) - Prompt Engineering 深度分析
-3. [学习 prompts 实践](04-deep-dive/learning-prompts-collection.md) - 100+ 实践 prompts
+3. [Serena 高级模式](serena-mcp/05-advanced-patterns.md) - MCP 工具集成
+4. [学习 prompts 实践](04-deep-dive/learning-prompts-collection.md) - 100+ 实践 prompts
 
 ---
 
@@ -130,6 +158,15 @@ claude-best-practices/
 | **索引** | 结构指南 | PROJECT_INDEX.json |
 | **命令** | 交互接口 | .claude/commands/ |
 
+### Serena 四大组件
+
+| 组件 | 说明 | 关键文件 |
+|------|------|----------|
+| **配置系统** | 项目级配置 | .serena/project.yml |
+| **内存系统** | 持久化知识 | .serena/memories/ |
+| **MCP 工具** | 读写接口 | MCP server tools |
+| **Git 同步** | 跨设备协作 | .serena/.gitignore |
+
 ---
 
 ## 实战检查清单
@@ -151,6 +188,12 @@ claude-best-practices/
 - [ ] 边界情况是否处理
 - [ ] 错误处理是否完善
 
+### 配置 Serena 时
+- [ ] project.yml 配置正确
+- [ ] .serena/.gitignore 只排除 /cache
+- [ ] memories/ 目录有组织结构
+- [ ] Git 追踪配置文件
+
 ---
 
 ## 推荐资源
@@ -169,6 +212,7 @@ claude-best-practices/
 - [CLAUDE.md](../CLAUDE.md) - 项目配置
 - [PROJECT_INDEX.json](../PROJECT_INDEX.json) - 项目索引
 - [.claude/commands/](../.claude/commands/) - 自定义命令
+- [.serena/](../.serena/) - Serena 配置和记忆
 
 ---
 
@@ -182,4 +226,4 @@ claude-best-practices/
 
 ---
 
-**开始你的 AI Engineering 之旅！** 🚀
+**开始你的 AI Engineering 之旅！**
