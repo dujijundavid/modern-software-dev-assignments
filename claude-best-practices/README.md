@@ -47,6 +47,7 @@
 |------|------|------|
 | [/sc:pm 深度解析](04-deep-dive/sc-pm-explained.md) | /sc:pm 完全解析 | 工作流、记忆系统 |
 | [/sc:index-repo 深度分析](04-deep-dive/index-repo-analysis.md) | /sc:index-repo 分析 | Prompt 拆解 |
+| [Context7 MCP 完全指南](04-deep-dive/context7-mcp-guide.md) | 获取最新库文档 | 工具详解、最佳实践 |
 | [100+ 学习 prompts](04-deep-dive/learning-prompts-collection.md) | 实践练习集合 | 8个主题，100+ prompts |
 
 ---
@@ -88,6 +89,7 @@ claude-best-practices/
 ├── 04-deep-dive/                  # 【我要深入学习】
 │   ├── sc-pm-explained.md
 │   ├── index-repo-analysis.md
+│   ├── context7-mcp-guide.md
 │   └── learning-prompts-collection.md
 │
 └── serena-mcp/                    # 【Serena MCP 系统】
