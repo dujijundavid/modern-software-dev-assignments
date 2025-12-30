@@ -3,8 +3,9 @@
     "project_name": "CS146S: Modern Software Developer",
     "institution": "Stanford University",
     "term": "Fall 2025",
-    "generated_at": "2025-12-28",
-    "index_version": "1.0",
+    "generated_at": "2025-12-30",
+    "index_version": "1.1",
+    "poetry_version": "2.2.1",
     "token_efficiency": {
       "full_codebase_tokens": 58000,
       "index_tokens": 3000,
@@ -13,12 +14,25 @@
   },
   "project_structure": {
     "root": "modern-software-dev-assignments/",
+    "directories": {
+      "week1": "Prompt Engineering (6 Python files)",
+      "week2": "FastAPI + LLM Integration (app/, tests/)",
+      "week3": "MCP Server (server/, weather_server/)",
+      "week4": "Claude Code Automation (backend/, frontend/)",
+      "week5": "Warp Agentic Development (backend/, frontend/)",
+      "week6": "Security Analysis (backend/, frontend/)",
+      "week7": "AI Code Review (backend/, frontend/)",
+      "week8": "Multi-Stack Build",
+      "learning_notes": "Learning notes and prompt templates",
+      ".claude": "Claude Code configuration and custom commands",
+      ".serena": "Serena MCP integration with shared memories",
+      "claude-best-practices": "Best practices collection (12 guides)"
+    },
     "weeks": [
       {
         "week": 1,
         "theme": "Prompt Engineering",
         "path": "week1/",
-        "skills": ["K-shot", "Chain-of-Thought", "Tool Calling", "RAG", "Reflexion"],
         "files": [
           "k_shot_prompting.py",
           "chain_of_thought.py",
@@ -33,17 +47,17 @@
         "week": 2,
         "theme": "LLM-Powered Apps",
         "path": "week2/",
-        "skills": ["FastAPI", "LLM Integration", "Testing", "Refactoring"],
         "structure": {
           "backend": "week2/app/",
-          "routers": "week2/app/routers/",
-          "services": "week2/app/services/",
+          "routers": ["action_items.py", "notes.py"],
+          "services": "extract.py",
           "tests": "week2/tests/"
         },
         "key_files": [
           "app/services/extract.py",
           "app/main.py",
-          "tests/test_extract.py"
+          "app/routers/action_items.py",
+          "app/routers/notes.py"
         ],
         "tech_stack": ["FastAPI", "SQLAlchemy", "Ollama", "pytest"],
         "coverage": 85
@@ -52,16 +66,9 @@
         "week": 3,
         "theme": "MCP Server",
         "path": "week3/",
-        "skills": ["Model Context Protocol", "API Integration"],
         "servers": [
-          {
-            "name": "Notion MCP",
-            "path": "week3/server/main.py"
-          },
-          {
-            "name": "Weather MCP",
-            "path": "week3/weather_server/weather.py"
-          }
+          {"name": "Notion MCP", "path": "server/main.py"},
+          {"name": "Weather MCP", "path": "weather_server/weather.py"}
         ],
         "tech_stack": ["MCP", "Notion API", "httpx"]
       },
@@ -69,192 +76,130 @@
         "week": 4,
         "theme": "Claude Code Automation",
         "path": "week4/",
-        "skills": ["Slash Commands", "CLAUDE.md", "SubAgents"],
-        "structure": {
-          "backend": "week4/backend/",
-          "frontend": "week4/frontend/",
-          "data": "week4/data/",
-          "tasks": "week4/docs/TASKS.md"
-        },
+        "structure": {"backend": "backend/", "frontend": "frontend/", "data": "data/"},
         "tech_stack": ["FastAPI", "SQLite", "Claude Code"]
       },
       {
         "week": 5,
         "theme": "Warp Agentic Development",
         "path": "week5/",
-        "skills": ["Warp Drive", "Multi-Agent Workflows"],
-        "structure": {
-          "backend": "week5/backend/",
-          "frontend": "week5/frontend/",
-          "tasks": "week5/docs/TASKS.md"
-        },
+        "structure": {"backend": "backend/", "frontend": "frontend/"},
         "tech_stack": ["FastAPI", "Warp", "Multi-Agent"]
       },
       {
         "week": 6,
         "theme": "Security Analysis",
         "path": "week6/",
-        "skills": ["SAST", "Secrets Scanning", "SCA"],
-        "tools": ["Semgrep"],
-        "scan_targets": ["backend/", "frontend/", "requirements.txt"]
+        "structure": {"backend": "backend/", "frontend": "frontend/"},
+        "tech_stack": ["FastAPI", "Semgrep"]
       },
       {
         "week": 7,
         "theme": "AI Code Review",
         "path": "week7/",
-        "skills": ["Graphite Diamond", "Manual vs AI Review"],
-        "structure": {
-          "backend": "week7/backend/",
-          "frontend": "week7/frontend/",
-          "tasks": "week7/docs/TASKS.md"
-        },
-        "tech_stack": ["Graphite", "Git PRs"]
+        "structure": {"backend": "backend/", "frontend": "frontend/"},
+        "tech_stack": ["FastAPI", "Graphite Diamond"]
       },
       {
         "week": 8,
         "theme": "Multi-Stack Build",
         "path": "week8/",
-        "skills": ["Full-Stack Development", "Tech Stack Comparison"],
-        "requirements": {
-          "min_versions": 3,
-          "bolt_required": true,
-          "non_js_required": true
-        },
         "tech_stack": ["Bolt.new", "MERN", "Django", "Rails"]
       }
     ],
     "learning_notes": {
       "root": "learning_notes/",
       "strategy": "00_learning_strategy.md",
-      "weeks": {
-        "week1": {
-          "path": "learning_notes/week1/",
-          "files": 8,
-          "topics": ["Prompt Engineering", "Agent Interaction", "Case Studies"]
-        },
-        "week2": {
-          "path": "learning_notes/week2/",
-          "files": 10,
-          "topics": ["LLM Integration", "Testing", "Python Import System"],
-          "highlights": [
-            "WEEK2_LEARNING_SUMMARY.md (875 lines)",
-            "testing_llm_functions_guide.md",
-            "python_import_system_guide.md"
-          ]
-        },
-        "week3": {
-          "path": "learning_notes/week3/",
-          "files": 3,
-          "topics": ["MCP Server", "API Integration"]
-        }
+      "prompts_path": "learning_notes/prompts/",
+      "week1": {"path": "week1/", "topics": ["Prompt Engineering", "Agent Interaction", "Case Studies"]},
+      "week2": {
+        "path": "week2/",
+        "subdirectories": ["fundamentals/", "practice/", "reference/", "_archive/"],
+        "highlights": ["WEEK2_LEARNING_SUMMARY.md", "testing guide", "import system guide"]
       },
-      "prompts": {
-        "path": "learning_notes/prompts/",
-        "templates": [
-          {"file": "01_pre_learning.md", "phase": "before", "purpose": "Concept understanding"},
-          {"file": "02_collaborative_coding.md", "phase": "during", "purpose": "Assignment collaboration"},
-          {"file": "03_critical_review.md", "phase": "after", "purpose": "Code review"},
-          {"file": "04_note_generation.md", "phase": "after", "purpose": "Summary generation"},
-          {"file": "05_spaced_review.md", "phase": "periodic", "purpose": "Spaced repetition"},
-          {"file": "06_mini_project.md", "phase": "deep", "purpose": "Project-based learning"}
-        ]
-      }
+      "week3": {"path": "week3/", "topics": ["MCP Server", "API Integration"]}
     },
     "claude_config": {
       "root": ".claude/",
       "main_config": "CLAUDE.md",
       "commands": ".claude/commands/",
       "custom_commands": [
-        {"file": "week.md", "description": "Get help with weekly assignments"},
-        {"file": "explore-week.md", "description": "Deep dive into week state"},
-        {"file": "test-week.md", "description": "Run and analyze tests"},
-        {"file": "mcp-server.md", "description": "MCP server help"},
-        {"file": "refactor.md", "description": "Systematic code cleanup"},
-        {"file": "llm-extract.md", "description": "LLM extraction help"}
+        "week.md",
+        "explore-week.md",
+        "test-week.md",
+        "mcp-server.md",
+        "refactor.md",
+        "llm-extract.md",
+        "review-pr.md"
+      ]
+    },
+    "serena_config": {
+      "root": ".serena/",
+      "memories": ".serena/memories/",
+      "memory_files": [
+        "agent_communication_log.md",
+        "architecture_decisions.md",
+        "code_patterns.md",
+        "common_issues_solutions.md",
+        "development_workflow.md",
+        "learning_progress.md",
+        "llm_integration_patterns.md",
+        "project_context_and_goals.md",
+        "security_considerations.md",
+        "session_history.md",
+        "tech_stack.md",
+        "testing_strategies.md",
+        "weekly_assignments.md"
+      ]
+    },
+    "claude_best_practices": {
+      "root": "claude-best-practices/",
+      "learning_prompts": ["document-skills-guide.md", "sc-pm-explained.md", "superclaude-architecture-analysis.md"],
+      "project_patterns": [
+        "01-project-index-usage.md",
+        "02-subagent-system.md",
+        "03-claude-md-best-practices.md",
+        "04-skill-design-best-practices.md",
+        "05-skills-system-guide.md"
       ],
-      "subagent_guide": ".claude/SUBAGENT_GUIDE.md"
+      "prompt_engineering": ["01-index-repo-analysis.md", "02-ai-engineering-principles.md"]
     }
   },
   "tech_stack": {
-    "languages": {
-      "python": ">=3.10,<4.0",
-      "javascript": "ES6+",
-      "sql": "SQLite"
-    },
+    "languages": {"python": ">=3.10,<4.0", "javascript": "ES6+", "sql": "SQLite"},
     "frameworks": {
       "backend": "FastAPI >=0.111.0",
       "orm": "SQLAlchemy >=2.0.0",
-      "validation": "Pydantic >=2.0.0"
+      "validation": "Pydantic >=2.0.0",
+      "server": "Uvicorn >=0.23.0"
     },
-    "llm": {
-      "local": "Ollama ^0.5.3",
-      "models": ["llama3.1:8b"],
-      "api": "OpenAI >=1.0.0"
-    },
-    "testing": {
-      "framework": "pytest >=7.0.0",
-      "http_client": "httpx >=0.24.0",
-      "coverage": "pytest-cov ^7.0.0"
-    },
-    "code_quality": {
-      "formatter": "black >=24.1.0",
-      "linter": "ruff >=0.4.0",
-      "hooks": "pre-commit >=3.6.0"
-    },
-    "ai_tools": {
-      "ollama": {"introduced": "Week 1", "purpose": "Local LLM inference"},
-      "claude_code": {"introduced": "Week 4", "purpose": "AI coding assistant"},
-      "warp": {"introduced": "Week 5", "purpose": "AI terminal environment"},
-      "semgrep": {"introduced": "Week 6", "purpose": "Security scanning"},
-      "graphite": {"introduced": "Week 7", "purpose": "AI code review"},
-      "bolt": {"introduced": "Week 8", "purpose": "AI app generation"}
-    }
+    "llm": {"local": "Ollama ^0.5.3", "models": ["llama3.1:8b"], "api": "OpenAI >=1.0.0"},
+    "testing": {"framework": "pytest >=7.0.0", "http_client": "httpx >=0.24.0", "coverage": "pytest-cov ^7.0.0"},
+    "code_quality": {"formatter": "black >=24.1.0", "linter": "ruff >=0.4.0", "hooks": "pre-commit >=3.6.0"},
+    "package_manager": {"name": "Poetry", "version": "2.2.1"},
+    "environment": {"tool": "Conda", "python_version": "3.12.7"}
   },
   "skills_pyramid": {
     "level_1": {
       "name": "Prompt Engineering Basics",
       "weeks": [1, 2],
-      "skills": [
-        "K-shot prompting",
-        "Chain-of-Thought",
-        "Tool Calling",
-        "RAG",
-        "Reflexion",
-        "Structured Output",
-        "System Prompt Design"
-      ]
+      "skills": ["K-shot", "Chain-of-Thought", "Tool Calling", "RAG", "Reflexion", "Structured Output"]
     },
     "level_2": {
       "name": "AI-Human Collaborative Development",
       "weeks": [3, 4, 5, 6, 7],
-      "skills": [
-        "MCP Server Development",
-        "Claude Code Automation",
-        "Multi-Agent Workflows",
-        "Security Analysis",
-        "AI Code Review"
-      ]
+      "skills": ["MCP Server", "Claude Code Automation", "Multi-Agent Workflows", "Security Analysis", "AI Code Review"]
     },
     "level_3": {
       "name": "AI System Design & Orchestration",
       "weeks": [8],
-      "skills": [
-        "Multi-Stack Development",
-        "AI-Accelerated Full-Stack",
-        "Tech Stack Comparison"
-      ]
+      "skills": ["Multi-Stack Development", "AI Full-Stack", "Tech Stack Comparison"]
     }
   },
   "learning_methodology": {
     "name": "BPRT Cycle",
-    "phases": [
-      {"phase": "Build", "description": "Hands-on implementation"},
-      {"phase": "Prompt", "description": "Optimize AI interaction"},
-      {"phase": "Reflect", "description": "Compare human vs AI output"},
-      {"phase": "Teach", "description": "Create structured notes"}
-    ],
-    "prompts_available": 6,
-    "note_template_example": "learning_notes/week2/WEEK2_LEARNING_SUMMARY.md"
+    "phases": ["Build", "Prompt", "Reflect", "Teach"],
+    "prompts_available": 6
   },
   "quick_commands": {
     "environment": {
@@ -267,53 +212,26 @@
       "full": "pytest week2/tests/",
       "coverage": "pytest week2/tests/ --cov=week2/app --cov-report=html"
     },
-    "run_app": {
-      "week2": "cd week2 && make run",
-      "week4": "cd week4 && make run",
-      "general": "python -m uvicorn week2.app.main:app --reload"
-    },
-    "ollama": {
-      "start": "ollama serve",
-      "pull": "ollama pull llama3.1:8b"
-    },
-    "claude_code": [
-      "/week",
-      "/explore-week",
-      "/test-week",
-      "/mcp-server",
-      "/refactor"
-    ]
+    "ollama": {"start": "ollama serve", "pull": "ollama pull llama3.1:8b"},
+    "claude_code": ["/week", "/explore-week", "/test-week", "/mcp-server", "/refactor"]
   },
   "statistics": {
+    "week_folders": 8,
     "python_files": 90,
-    "markdown_files": 67,
-    "test_files": 17,
-    "learning_notes": 21,
-    "custom_commands": 6,
-    "total_weeks": 8,
-    "code_coverage": 85,
-    "estimated_lines": 10000
-  },
-  "navigation": {
-    "for_ai_agents": [
-      "Read PROJECT_INDEX.md first for structure",
-      "Use /week command for week-specific context",
-      "Use code-reviewer agent before commits",
-      "Use /test-week to run tests"
-    ],
-    "for_learners": [
-      "Follow BPRT cycle (Build-Prompt-Reflect-Teach)",
-      "Reference Week 2 notes as template",
-      "Use prompt templates in learning_notes/prompts/",
-      "Generate weekly learning summaries"
-    ]
+    "markdown_files": 70,
+    "test_files": 20,
+    "learning_notes": 25,
+    "custom_commands": 7,
+    "claude_best_practices": 12,
+    "serena_memories": 13,
+    "code_coverage": 85
   },
   "key_resources": {
     "internal": [
       {"name": "Learning Strategy", "path": "learning_notes/00_learning_strategy.md"},
-      {"name": "Week 2 Example", "path": "learning_notes/week2/WEEK2_LEARNING_SUMMARY.md"},
-      {"name": "Testing Guide", "path": "learning_notes/week2/testing_llm_functions_guide.md"},
-      {"name": "AI Config", "path": "CLAUDE.md"}
+      {"name": "Week 2 Example", "path": "learning_notes/week2/_archive/WEEK2_LEARNING_SUMMARY.md"},
+      {"name": "AI Config", "path": "CLAUDE.md"},
+      {"name": "Serena Memories", "path": ".serena/memories/"}
     ],
     "external": [
       {"name": "Course Website", "url": "https://themodernsoftware.dev"},

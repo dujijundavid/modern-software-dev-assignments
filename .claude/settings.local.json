@@ -23,7 +23,10 @@
       "Bash(find:*)",
       "Bash(xargs:*)",
       "Bash(cat:*)",
-      "Bash(readlink:*)"
+      "Bash(readlink:*)",
+      "Bash(tree:*)",
+      "Bash(wc:*)",
+      "Bash(done:*)"
     ]
   },
   "enableAllProjectMcpServers": true
