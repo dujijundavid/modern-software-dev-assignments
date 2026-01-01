@@ -97,10 +97,11 @@ Slash commands are a feature for repeated workflows, letting you create reusable
   - Name: `docs-sync.md`
   - Intent: Read `/openapi.json`, update `docs/API.md`, and list route deltas.
   - Output: Diff-like summary and TODOs.
-- Example 3: Refactor harness
-  - Name: `refactor-module.md`
-  - Intent: Rename a module (e.g., `services/extract.py` → `services/parser.py`), update imports, run lint/tests.
-  - Output: A checklist of modified files and verification steps.
+- Example 3: Learning mode
+  - Name: `learning-mode.md`
+  - Intent: Adaptive learning companion for codebase exploration - optimized for learning by doing
+  - Inputs: Topic or codebase path to explore
+  - Output: Interactive learning session with quizzes, progress tracking, and spaced repetition schedule
 
 >*Tips: Keep commands focused, use `$ARGUMENTS`, and prefer idempotent steps. Consider allowlisting safe tools and using headless mode for repeatability.*
 
