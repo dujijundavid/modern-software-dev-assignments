@@ -51,7 +51,12 @@
       "mcp__notion__API-retrieve-a-page-property",
       "mcp__4_5v_mcp__analyze_image",
       "mcp__web_reader__webReader",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(conda run:*)",
+      "Bash(source:*)",
+      "Bash(conda activate:*)",
+      "Bash(uvicorn:*)",
+      "Bash(git checkout:*)"
     ]
   },
   "enableAllProjectMcpServers": true
