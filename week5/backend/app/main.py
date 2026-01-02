@@ -8,14 +8,8 @@ from .db import apply_seed_if_needed, engine
 from .models import Base
 from .routers import action_items as action_items_router
 from .routers import notes as notes_router
-from .routers import agents as agents_router
-from .routers import executions as executions_router
-from .routers import workflows as workflows_router
 
-app = FastAPI(
-    title="Agent Orchestration System",
-    description="Multi-Agent Execution Tracker - Week 5: Multi-Agent Workflows with Claude Code"
-)
+app = FastAPI(title="Modern Software Dev Starter (Week 5)")
 
 # Ensure data dir exists
 Path("data").mkdir(parents=True, exist_ok=True)
@@ -38,6 +32,3 @@ async def root() -> FileResponse:
 # Routers
 app.include_router(notes_router.router)
 app.include_router(action_items_router.router)
-app.include_router(agents_router.router, prefix="/api", tags=["agents"])
-app.include_router(executions_router.router, prefix="/api", tags=["executions"])
-app.include_router(workflows_router.router, prefix="/api", tags=["workflows"])

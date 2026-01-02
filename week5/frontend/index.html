@@ -3,105 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Agent Orchestration System - Week 5</title>
+    <title>Modern Software Dev Starter</title>
     <link rel="stylesheet" href="/static/styles.css" />
   </head>
   <body>
-    <header>
-      <h1>Agent Orchestration System</h1>
-      <p>Multi-Agent Execution Tracker - Week 5: Multi-Agent Workflows with Claude Code</p>
-    </header>
-
-    <nav class="tabs">
-      <button class="tab active" data-tab="dashboard">Dashboard</button>
-      <button class="tab" data-tab="agents">Agents</button>
-      <button class="tab" data-tab="timeline">Timeline</button>
-      <button class="tab" data-tab="workflows">Workflows</button>
-      <button class="tab" data-tab="patterns">Patterns</button>
-      <button class="tab" data-tab="notes">Notes (Demo)</button>
-    </nav>
-
     <main>
-      <!-- Dashboard Tab -->
-      <section id="dashboard" class="tab-content active">
-        <h2>Agent Metrics Dashboard</h2>
-        <div class="metrics-grid">
-          <div class="metric-card">
-            <h3>Total Executions</h3>
-            <p class="metric-value" id="total-executions">-</p>
-          </div>
-          <div class="metric-card">
-            <h3>Success Rate</h3>
-            <p class="metric-value" id="success-rate">-</p>
-          </div>
-          <div class="metric-card">
-            <h3>Avg Duration</h3>
-            <p class="metric-value" id="avg-duration">-</p>
-          </div>
-          <div class="metric-card">
-            <h3>Active Agents</h3>
-            <p class="metric-value" id="active-agents">-</p>
-          </div>
-        </div>
-        <div class="metrics-section">
-          <h3>Executions by Agent</h3>
-          <div id="agent-metrics" class="agent-metrics-list"></div>
-        </div>
-      </section>
+      <h1>Modern Software Dev Starter</h1>
 
-      <!-- Agents Tab -->
-      <section id="agents" class="tab-content">
-        <h2>Agent Registry</h2>
-        <div class="filters">
-          <select id="agent-capability-filter">
-            <option value="">All Capabilities</option>
-            <option value="testing">Testing</option>
-            <option value="development">Development</option>
-            <option value="documentation">Documentation</option>
-            <option value="orchestration">Orchestration</option>
-          </select>
-          <select id="agent-pattern-filter">
-            <option value="">All Patterns</option>
-            <option value="sequential">Sequential</option>
-            <option value="parallel">Parallel</option>
-            <option value="hierarchical">Hierarchical</option>
-          </select>
-        </div>
-        <div id="agents-list" class="agents-grid"></div>
-      </section>
-
-      <!-- Timeline Tab -->
-      <section id="timeline" class="tab-content">
-        <h2>Execution Timeline</h2>
-        <div class="filters">
-          <select id="timeline-agent-filter">
-            <option value="">All Agents</option>
-          </select>
-          <select id="timeline-status-filter">
-            <option value="">All Status</option>
-            <option value="success">Success</option>
-            <option value="failure">Failure</option>
-            <option value="pending">Pending</option>
-          </select>
-        </div>
-        <div id="timeline-view" class="timeline-container"></div>
-      </section>
-
-      <!-- Workflows Tab -->
-      <section id="workflows" class="tab-content">
-        <h2>Workflow Templates</h2>
-        <div id="workflows-list" class="workflows-grid"></div>
-      </section>
-
-      <!-- Patterns Tab -->
-      <section id="patterns" class="tab-content">
-        <h2>Coordination Patterns</h2>
-        <div id="patterns-list" class="patterns-grid"></div>
-      </section>
-
-      <!-- Notes Tab (Demo) -->
-      <section id="notes" class="tab-content">
-        <h2>Notes (Demo App)</h2>
+      <section>
+        <h2>Notes</h2>
         <form id="note-form">
           <input id="note-title" placeholder="Title" required />
           <input id="note-content" placeholder="Content" required />
@@ -111,7 +21,7 @@
       </section>
 
       <section>
-        <h2>Action Items (Demo)</h2>
+        <h2>Action Items</h2>
         <form id="action-form">
           <input id="action-desc" placeholder="Description" required />
           <button type="submit">Add</button>
@@ -119,14 +29,6 @@
         <ul id="actions"></ul>
       </section>
     </main>
-
-    <div id="agent-detail-modal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2 id="modal-agent-name">Agent Details</h2>
-        <div id="modal-agent-details"></div>
-      </div>
-    </div>
 
     <script src="/static/app.js"></script>
   </body>
