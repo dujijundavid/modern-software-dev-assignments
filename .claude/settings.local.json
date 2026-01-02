@@ -56,7 +56,15 @@
       "Bash(source:*)",
       "Bash(conda activate:*)",
       "Bash(uvicorn:*)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(poetry:*)",
+      "Bash($SHELL --version)",
+      "Bash(conda:*)",
+      "Bash(/Users/David/miniconda3/bin/conda:*)",
+      "Bash(export PATH:*)",
+      "Bash(PYTHONPATH=. poetry run pytest:*)",
+      "Bash(/usr/bin/python3:*)",
+      "Bash(echo:*)"
     ]
   },
   "enableAllProjectMcpServers": true

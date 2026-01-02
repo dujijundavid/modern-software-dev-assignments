@@ -2,7 +2,15 @@
 
 This is the home of the assignments for [CS146S: The Modern Software Developer](https://themodernsoftware.dev), taught at Stanford University fall 2025.
 
-## Repo Setup
+## 🚀 Quick Start
+
+**New here?** Follow the setup instructions below.
+
+**Having environment issues?** See the [Environment Setup Guide](docs/week5/guides/quick-start.md).
+
+**Looking for documentation?** Check the [Documentation Index](docs/INDEX.md).
+
+## 🔧 Repo Setup
 These steps work with Python 3.12.
 
 1. Install Anaconda
