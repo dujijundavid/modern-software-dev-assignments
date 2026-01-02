@@ -37,8 +37,13 @@ class Agent(Base):
     coordination_patterns = Column(JSON, default=list)  # List of pattern names
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    # Relationships
-    executions = relationship("Execution", back_populates="agent", cascade="all, delete-orphan")
+    # Relationships - using primaryjoin since agent_name is a string field, not a FK
+    executions = relationship(
+        "Execution",
+        primaryjoin="Agent.name == Execution.agent_name",
+        foreign_keys="[Execution.agent_name]",
+        back_populates="agent"
+    )
 
 
 class Execution(Base):
@@ -58,7 +63,7 @@ class Execution(Base):
     # Relationships
     agent = relationship("Agent", foreign_keys=[agent_name], primaryjoin="Agent.name == Execution.agent_name")
     parent_execution = relationship("Execution", remote_side=[id], backref="child_executions")
-    workflow_execution = relationship("WorkflowExecution", back_populates="executions")
+    # workflow_execution is accessed through the secondary table WorkflowExecutionLink
 
 
 class CoordinationPattern(Base):
@@ -101,7 +106,6 @@ class WorkflowExecution(Base):
 
     # Relationships
     workflow_template = relationship("WorkflowTemplate", back_populates="executions")
-    executions = relationship("Execution", secondary="workflow_execution_links", back_populates="workflow_execution")
 
 
 class WorkflowExecutionLink(Base):
