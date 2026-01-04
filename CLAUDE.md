@@ -19,16 +19,20 @@ You are not a "coder" — you are an **AI workflow architect**. Every task shoul
 3️⃣ How to compound value?     这个自动化如何与其他自动化产生 1+1>3 的效果？
 ```
 
-### The Automation Hierarchy
-
+**能力层级对应** (Enhanced):
 ```
-Level 1: One-off Script    → 解决一次问题
-Level 2: Reusable Function → 解决一类问题
-Level 3: Composable System → 可以与其他自动化组合
-Level 4: Self-Improving    → 能够发现和优化自己的瓶颈
+Level 1: One-off Script    → L1: 能用代码完成任务
+Level 2: Reusable Function → L2: 能写可复用函数
+Level 3: Composable System → L3: 能设计可组合系统 ⭐
+Level 4: Self-Improving    → L4: 能设计自改进系统
+
+详见 META_LEARNING.md 能力层级详解
 ```
 
-**Goal**: Always aim for Level 3+.
+**Goal**: 根据当前层级，选择对应自动化层级
+- L1-L2: 专注 Level 1-2 (解决具体问题)
+- L2-L3: 专注 Level 2-3 (构建可复用系统) ⭐
+- L3-L4: 可以尝试 Level 4 (自改进系统)
 
 ### Before Writing Code, Ask:
 
@@ -203,28 +207,39 @@ Use @performance-optimizer to analyze slow database queries
 
 ## 🎯 Week 5 Specific Guidance: Agentic Development with Warp
 
-### Recommended Automation Priority (Based on Leverage)
+### Recommended Automation Priority (Enhanced with Capability Levels)
 
 ```yaml
-Tier 1 (Foundation - Do First):
+Tier 1 (Foundation - Do First) → 适合 L1-L2:
   - Environment Setup & Health Check
   - Test Runner with Coverage
   - Format + Lint Pipeline
+  目标: 巩固工具使用，建立基础自动化习惯
 
-Tier 2 (High Leverage):
+Tier 2 (High Leverage) → 适合 L2-L3 ⭐:
   - API Response Standardization (Task 7)
   - Pagination Pattern (Task 8)
   - Error Handling Wrapper
+  目标: 练习流程自动化，突破到 L3
 
-Tier 3 (Feature-Level):
+Tier 3 (Feature-Level) → 适合 L2-L3:
   - Notes Search (Task 2)
   - Bulk Operations (Task 4)
   - Extraction Logic (Task 6)
+  目标: 巩固 L2-L3 能力
 
-Tier 4 (Complex/Advanced):
+Tier 4 (Complex/Advanced) → 适合 L3-L4:
   - Frontend Migration to React (Task 1)
   - Tags Feature (Task 5)
   - Vercel Deployment (Task 11)
+  目标: 练习系统架构设计
+
+选择建议:
+- 如果你在 L1-L2: 专注 Tier 1
+- 如果你在 L2-L3: 专注 Tier 2（这能帮你突破到 L3）⭐
+- 如果你在 L3-L4: 可以尝试 Tier 4
+
+详见 META_LEARNING.md 各层级的 Job-to-be-Done 触发条件
 ```
 
 ### Example Warp Saved Prompts
