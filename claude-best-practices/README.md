@@ -52,6 +52,16 @@
 
 ---
 
+### 我想分析需求/策略 → [06-analysis-tools/](06-analysis-tools/)
+**任务**：使用分析工具进行需求发现和战略思考
+
+| 文件 | 命令 | 说明 |
+|------|------|------|
+| [sc-brainstorm-guide.md](06-analysis-tools/sc-brainstorm-guide.md) | `/sc:brainstorm` | 交互式需求发现系统 |
+| [business-panel-guide.md](06-analysis-tools/business-panel-guide.md) | `/sc:business-panel` | 多专家商业分析 |
+
+---
+
 ### 我想掌握 Serena → [serena-mcp/](serena-mcp/)
 **任务**：深入理解 Serena AI 项目内存系统
 
@@ -92,6 +102,11 @@ claude-best-practices/
 │   ├── context7-mcp-guide.md
 │   └── learning-prompts-collection.md
 │
+├── 06-analysis-tools/             # 【我要分析需求/策略】
+│   ├── sc-brainstorm-guide.md
+│   ├── business-panel-guide.md
+│   └── README.md
+│
 └── serena-mcp/                    # 【Serena MCP 系统】
     ├── README.md
     ├── 01-architecture-overview.md
@@ -119,16 +134,20 @@ claude-best-practices/
 1. [Skill 设计最佳实践](03-create/skill-design-best-practices.md) - 创建自定义技能
 2. [Document Skills 指南](03-create/document-skills-guide.md) - 使用文档技能
 
-### Day 11-14: 掌握 Serena
-1. [Serena 架构概览](serena-mcp/01-architecture-overview.md) - 理解系统架构
-2. [Serena 配置指南](serena-mcp/02-configuration-guide.md) - 配置 project.yml
-3. [内存系统设计](serena-mcp/03-memory-system-design.md) - 组织项目记忆
+### Day 11-14: 掌握分析工具
+1. [/sc:brainstorm 需求发现](06-analysis-tools/sc-brainstorm-guide.md) - 交互式需求发现
+2. [/sc:business-panel 商业分析](06-analysis-tools/business-panel-guide.md) - 多专家分析系统
 
 ### Day 15+: 深入学习
 1. [/sc:pm 深度解析](04-deep-dive/sc-pm-explained.md) - 项目管理代理
 2. [/sc:index-repo 分析](04-deep-dive/index-repo-analysis.md) - Prompt Engineering 深度分析
 3. [Serena 高级模式](serena-mcp/05-advanced-patterns.md) - MCP 工具集成
 4. [学习 prompts 实践](04-deep-dive/learning-prompts-collection.md) - 100+ 实践 prompts
+
+### Day 16+: 掌握 Serena（可选）
+1. [Serena 架构概览](serena-mcp/01-architecture-overview.md) - 理解系统架构
+2. [Serena 配置指南](serena-mcp/02-configuration-guide.md) - 配置 project.yml
+3. [内存系统设计](serena-mcp/03-memory-system-design.md) - 组织项目记忆
 
 ---
 

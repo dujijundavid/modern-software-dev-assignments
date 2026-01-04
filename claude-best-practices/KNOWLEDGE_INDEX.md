@@ -14,6 +14,8 @@ claude-best-practices/
 ├── 02-understand/      # System architecture understanding
 ├── 03-create/          # Custom skill development
 ├── 04-deep-dive/       # Advanced topic analysis
+├── 05-learning_mode_design/  # Learning patterns
+├── 06-analysis-tools/  # Analysis & strategic thinking
 └── serena-mcp/         # Serena memory system
 ```
 
@@ -53,6 +55,14 @@ claude-best-practices/
 | [index-repo-analysis.md](04-deep-dive/index-repo-analysis.md) | /sc:index-repo | Prompt breakdown |
 | [context7-mcp-guide.md](04-deep-dive/context7-mcp-guide.md) | Context7 MCP | Tool details, best practices |
 | [learning-prompts-collection.md](04-deep-dive/learning-prompts-collection.md) | 100+ prompts | 8 topics, practice |
+
+### "I want to analyze business/strategy documents"
+→ [06-analysis-tools/](06-analysis-tools/)
+| File | Command | Purpose |
+|------|---------|---------|
+| [sc-brainstorm-guide.md](06-analysis-tools/sc-brainstorm-guide.md) | `/sc:brainstorm` | Interactive requirements discovery |
+| [business-panel-guide.md](06-analysis-tools/business-panel-guide.md) | `/sc:business-panel` | Multi-expert business analysis |
+| [README.md](06-analysis-tools/README.md) | Overview | All analysis tools |
 
 ### "I want to master Serena (memory system)"
 → [serena-mcp/](serena-mcp/)
@@ -198,6 +208,8 @@ learning/        # Knowledge capture
 2. [index-repo-analysis.md](04-deep-dive/index-repo-analysis.md) - Prompt engineering
 3. [05-advanced-patterns.md](serena-mcp/05-advanced-patterns.md) - Advanced patterns
 4. [learning-prompts-collection.md](04-deep-dive/learning-prompts-collection.md) - 100+ prompts
+5. [sc-brainstorm-guide.md](06-analysis-tools/sc-brainstorm-guide.md) - Requirements discovery
+6. [business-panel-guide.md](06-analysis-tools/business-panel-guide.md) - Business analysis
 
 ---
 
@@ -224,7 +236,7 @@ learning/        # Knowledge capture
 
 ---
 
-## 📖 File Inventory (21 files)
+## 📖 File Inventory (23 files)
 
 ### Setup (3 files)
 - `01-setup/claude-md-best-practices.md`
@@ -247,6 +259,11 @@ learning/        # Knowledge capture
 - `04-deep-dive/context7-mcp-guide.md`
 - `04-deep-dive/sc-pm-explained.md`
 - `04-deep-dive/learning-prompts-collection.md`
+
+### Analysis Tools (3 files)
+- `06-analysis-tools/sc-brainstorm-guide.md`
+- `06-analysis-tools/business-panel-guide.md`
+- `06-analysis-tools/README.md`
 
 ### Serena (6 files)
 - `serena-mcp/README.md`
@@ -272,6 +289,8 @@ learning/        # Knowledge capture
 | **AI Agents** | [02-understand/subagent-system.md](02-understand/subagent-system.md), [04-deep-dive/sc-pm-explained.md](04-deep-dive/sc-pm-explained.md) |
 | **Test-Driven Development** | [02-understand/tdd-first-principles.md](02-understand/tdd-first-principles.md) |
 | **Custom Commands** | [01-setup/skills-system-guide.md](01-setup/skills-system-guide.md), [03-create/skill-design-best-practices.md](03-create/skill-design-best-practices.md) |
+| **Requirements Discovery** | [06-analysis-tools/sc-brainstorm-guide.md](06-analysis-tools/sc-brainstorm-guide.md) |
+| **Business Analysis** | [06-analysis-tools/business-panel-guide.md](06-analysis-tools/business-panel-guide.md) |
 
 ---
 
@@ -285,4 +304,5 @@ learning/        # Knowledge capture
 
 ---
 
-**Status**: Ready for use. Last updated: 2025-12-31
+**Status**: Ready for use. Last updated: 2025-01-04
+**Total Files**: 24 (added sc-brainstorm-guide.md)
