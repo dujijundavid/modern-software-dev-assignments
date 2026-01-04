@@ -64,7 +64,13 @@
       "Bash(export PATH:*)",
       "Bash(PYTHONPATH=. poetry run pytest:*)",
       "Bash(/usr/bin/python3:*)",
-      "Bash(echo:*)"
+      "Bash(echo:*)",
+      "Bash(npm install)",
+      "Bash(npm run type-check:*)",
+      "Bash(lsof:*)",
+      "Bash(make:*)",
+      "Bash(kill:*)",
+      "Bash(npm run dev:*)"
     ]
   },
   "enableAllProjectMcpServers": true
