@@ -6,73 +6,81 @@
 
 ---
 
+## 新增/更新（人工维护，最近 5 条）
+- 2026-01-05 `KNOWLEDGE_INDEX.md`：同步文件计数、日期与节省率说明
+- 2026-01-05 `01-setup/claude-code-architecture.md`：新增受众说明与下一步阅读
+- 2026-01-05 `02-understand/superclaude-architecture.md`：补充编排/路由视角与互链
+- 2026-01-05 `05-learning_mode_design/commands-vs-skills.md`：命令 vs Skills 决策对比
+- 2026-01-05 `04-deep-dive/prompt-layer-design.md`：4 层 Prompt 设计框架收录
+
+---
+
 ## 快速导航
 
 ### 我想配置项目 → [01-setup/](01-setup/)
-**任务**：把 Claude Code 配置好，让项目对 AI 友友
-
-| 文件 | 说明 | 关键收益 |
-|------|------|---------|
-| [PROJECT_INDEX 使用指南](01-setup/project-index-usage.md) | 创建项目索引 | 94% token 节省 |
-| [CLAUDE.md 最佳实践](01-setup/claude-md-best-practices.md) | 配置 AI 行为 | 定义团队和工作流 |
-| [Skills 系统完全指南](01-setup/skills-system-guide.md) | 理解技能系统 | 扩展 AI 能力 |
+| 文件 | 适用场景 + 关键输出 |
+|------|--------------------|
+| [PROJECT_INDEX 使用指南](01-setup/project-index-usage.md) | 初次为项目建索引，拿到 94% token 节省的创建/更新流程 |
+| [CLAUDE.md 最佳实践](01-setup/claude-md-best-practices.md) | 需要统一 AI 行为时，产出团队化 CLAUDE.md 模板与校验清单 |
+| [Skills 系统完全指南](01-setup/skills-system-guide.md) | 扩展/安装 Skills 前阅读，明确目录结构、触发机制与发布方式 |
+| [Claude Code 架构指南](01-setup/claude-code-architecture.md) | 想速览四层体系（Skills/Commands/Subagents/Super Claude），拿到职责边界与调用链 |
 
 ---
 
 ### 我想理解系统 → [02-understand/](02-understand/)
-**任务**：理解 Claude Code 如何工作
-
-| 文件 | 说明 | 关键内容 |
-|------|------|---------|
-| [子代理系统架构](02-understand/subagent-system.md) | 理解子代理机制 | 专业化与委托 |
-| [SuperClaude 架构](02-understand/superclaude-architecture.md) | 理解整体架构 | 命令系统和 MCP |
-| [AI 工程核心原则](02-understand/ai-engineering-principles.md) | 理解工程原则 | ROI、Token 优化 |
+| 文件 | 适用场景 + 关键输出 |
+|------|--------------------|
+| [子代理系统架构](02-understand/subagent-system.md) | 需要设计/挑选子代理时，拿到并行与角色分离的设计框架 |
+| [SuperClaude 架构](02-understand/superclaude-architecture.md) | 想理解路由/编排层工作方式，获得命令体系与子代理调度视图 |
+| [AI 工程核心原则](02-understand/ai-engineering-principles.md) | 做决策前量化 ROI/Token，附典型节省算例 |
+| [TDD SubAgents 第一性原理](02-understand/tdd-first-principles.md) | 推行 TDD 协作时，得到 TestAgent/CodeAgent 分离的理由与交接格式 |
 
 ---
 
 ### 我想创建/开发 → [03-create/](03-create/)
-**任务**：创建自定义能力，扩展 Claude Code 功能
-
-| 文件 | 说明 | 输出 |
-|------|------|------|
-| [Skill 设计最佳实践](03-create/skill-design-best-practices.md) | 设计自定义 Skill | 新的 .claude/commands/ |
-| [Document Skills 使用指南](03-create/document-skills-guide.md) | 使用文档技能 | docx, pptx, pdf 等 |
+| 文件 | 适用场景 + 关键输出 |
+|------|--------------------|
+| [Skill 设计最佳实践](03-create/skill-design-best-practices.md) | 要发布/分享技能时，拿到命名、结构、校验清单与打包指引 |
+| [Document Skills 使用指南](03-create/document-skills-guide.md) | 处理 docx/pptx/pdf/xlsx 等文档时，快速获取调用示例与限制 |
 
 ---
 
 ### 我想深入学习 → [04-deep-dive/](04-deep-dive/)
-**任务**：深入理解特定命令和功能的内部原理
+| 文件 | 适用场景 + 关键输出 |
+|------|--------------------|
+| [/sc:pm 深度解析](04-deep-dive/sc-pm-explained.md) | 使用/二次开发 PM Agent 时，拿到路由、记忆与校验流程 |
+| [/sc:index-repo 深度分析](04-deep-dive/index-repo-analysis.md) | 优化索引/Prompt 时，看到 prompt 拆解与 token 策略 |
+| [Context7 MCP 完全指南](04-deep-dive/context7-mcp-guide.md) | 需要最新库文档检索时，掌握 Context7 工具用法与坑位 |
+| [100+ 学习 prompts](04-deep-dive/learning-prompts-collection.md) | 练习/教学时，直接套用 8 主题 100+ Prompt |
+| [Prompt 4 层设计](04-deep-dive/prompt-layer-design.md) | 设计高稳定度 Prompt 时，套用 Persona/Process/Output/Validation 模型 |
 
-| 文件 | 说明 | 深度 |
-|------|------|------|
-| [/sc:pm 深度解析](04-deep-dive/sc-pm-explained.md) | /sc:pm 完全解析 | 工作流、记忆系统 |
-| [/sc:index-repo 深度分析](04-deep-dive/index-repo-analysis.md) | /sc:index-repo 分析 | Prompt 拆解 |
-| [Context7 MCP 完全指南](04-deep-dive/context7-mcp-guide.md) | 获取最新库文档 | 工具详解、最佳实践 |
-| [100+ 学习 prompts](04-deep-dive/learning-prompts-collection.md) | 实践练习集合 | 8个主题，100+ prompts |
+---
+
+### 我想设计学习模式 → [05-learning_mode_design/](05-learning_mode_design/)
+| 文件 | 适用场景 + 关键输出 |
+|------|--------------------|
+| [Commands vs Skills 对比](05-learning_mode_design/commands-vs-skills.md) | 需要在命令/Skill 间做决策时，快速对比触发、共享、版本与命名策略 |
 
 ---
 
 ### 我想分析需求/策略 → [06-analysis-tools/](06-analysis-tools/)
-**任务**：使用分析工具进行需求发现和战略思考
-
-| 文件 | 命令 | 说明 |
-|------|------|------|
-| [sc-brainstorm-guide.md](06-analysis-tools/sc-brainstorm-guide.md) | `/sc:brainstorm` | 交互式需求发现系统 |
-| [business-panel-guide.md](06-analysis-tools/business-panel-guide.md) | `/sc:business-panel` | 多专家商业分析 |
+| 文件 | 适用场景 + 关键输出 |
+|------|--------------------|
+| [sc-brainstorm-guide.md](06-analysis-tools/sc-brainstorm-guide.md) | 需求挖掘时，使用 `/sc:brainstorm` 的问诊流程与输出模板 |
+| [business-panel-guide.md](06-analysis-tools/business-panel-guide.md) | 商业/战略分析时，调用多专家 Panel 的提纲与校验表 |
+| [目录总览](06-analysis-tools/README.md) | 想知道工具全景时，一眼看到可用命令与入门链接 |
 
 ---
 
 ### 我想掌握 Serena → [serena-mcp/](serena-mcp/)
-**任务**：深入理解 Serena AI 项目内存系统
-
-| 文件 | 说明 | 关键收益 |
-|------|------|---------|
-| [README.md](serena-mcp/README.md) | Serena 概览和导航 | 快速开始指南 |
-| [01-architecture-overview.md](serena-mcp/01-architecture-overview.md) | 架构概览 | 系统组件详解 |
-| [02-configuration-guide.md](serena-mcp/02-configuration-guide.md) | 配置完全指南 | project.yml 参考 |
-| [03-memory-system-design.md](serena-mcp/03-memory-system-design.md) | 内存系统设计 | 记忆组织策略 |
-| [04-cross-machine-sync.md](serena-mcp/04-cross-machine-sync.md) | 跨机器协作 | Git 共享策略 |
-| [05-advanced-patterns.md](serena-mcp/05-advanced-patterns.md) | 高级模式技巧 | MCP 工具集成 |
+| 文件 | 适用场景 + 关键输出 |
+|------|--------------------|
+| [README.md](serena-mcp/README.md) | 需要快速了解 Serena 时的 10 分钟上手 |
+| [01-architecture-overview.md](serena-mcp/01-architecture-overview.md) | 评估组件/边界时的架构总览 |
+| [02-configuration-guide.md](serena-mcp/02-configuration-guide.md) | 配置 project.yml、启动 server 时的参数参考 |
+| [03-memory-system-design.md](serena-mcp/03-memory-system-design.md) | 设计记忆命名空间与持久化策略的模板 |
+| [04-cross-machine-sync.md](serena-mcp/04-cross-machine-sync.md) | 多设备/多人协作时的 Git 同步与忽略策略 |
+| [05-advanced-patterns.md](serena-mcp/05-advanced-patterns.md) | 需要高级 MCP 集成/模式时的案例与步骤 |
 
 ---
 
@@ -85,12 +93,14 @@ claude-best-practices/
 ├── 01-setup/                      # 【我要配置项目】
 │   ├── project-index-usage.md
 │   ├── claude-md-best-practices.md
+│   ├── claude-code-architecture.md
 │   └── skills-system-guide.md
 │
 ├── 02-understand/                 # 【我要理解系统】
 │   ├── subagent-system.md
 │   ├── superclaude-architecture.md
-│   └── ai-engineering-principles.md
+│   ├── ai-engineering-principles.md
+│   └── tdd-first-principles.md
 │
 ├── 03-create/                     # 【我要创建/开发】
 │   ├── skill-design-best-practices.md
@@ -100,7 +110,11 @@ claude-best-practices/
 │   ├── sc-pm-explained.md
 │   ├── index-repo-analysis.md
 │   ├── context7-mcp-guide.md
+│   ├── prompt-layer-design.md
 │   └── learning-prompts-collection.md
+│
+├── 05-learning_mode_design/       # 【我要设计学习模式】
+│   └── commands-vs-skills.md
 │
 ├── 06-analysis-tools/             # 【我要分析需求/策略】
 │   ├── sc-brainstorm-guide.md

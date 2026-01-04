@@ -1,8 +1,13 @@
 # Claude Best Practices - Knowledge Index
 
-> Generated: 2025-12-31 | Token Efficiency: 94% reduction (58K → 3K)
+> Generated: 2026-01-05 | Token Efficiency: ~94% reduction (≈60K → ≈3.6K)
 >
 > **Purpose**: This index provides instant context without loading all documentation. Use it to locate specific topics, then read only the relevant files.
+>
+> 更新提示（人工维护）：
+> - 手动更新时间：2026-01-05
+> - 文件计数：28（`find claude-best-practices -type f ! -name '.DS_Store' | wc -l`）
+> - 节省率假设：全文约 6 万 tokens，索引约 3.6 千 tokens，约 94% 减少
 
 ---
 
@@ -25,55 +30,70 @@ claude-best-practices/
 
 ### "I want to configure my project"
 → [01-setup/](01-setup/)
-| File | Purpose | Key Benefit |
-|------|---------|-------------|
-| [project-index-usage.md](01-setup/project-index-usage.md) | Create PROJECT_INDEX | 94% token savings |
-| [claude-md-best-practices.md](01-setup/claude-md-best-practices.md) | Configure CLAUDE.md | Define AI team/workflow |
-| [skills-system-guide.md](01-setup/skills-system-guide.md) | Skills system | Extend AI capabilities |
+| File | Use Case + Output |
+|------|-------------------|
+| [project-index-usage.md](01-setup/project-index-usage.md) | First/iterative index build; playbook to get ~94% token savings |
+| [claude-md-best-practices.md](01-setup/claude-md-best-practices.md) | Team-aligned CLAUDE.md with roles, process, and validation checklist |
+| [claude-code-architecture.md](01-setup/claude-code-architecture.md) | Quick map of Skills/Commands/Subagents/Super Claude boundaries and call chain |
+| [skills-system-guide.md](01-setup/skills-system-guide.md) | How to install/extend/share skills, directory layout, and trigger behavior |
 
 ### "I want to understand how Claude Code works"
 → [02-understand/](02-understand/)
-| File | Purpose | Key Concepts |
-|------|---------|--------------|
-| [subagent-system.md](02-understand/subagent-system.md) | Subagent architecture | Specialization & delegation |
-| [superclaude-architecture.md](02-understand/superclaude-architecture.md) | Overall architecture | Commands + MCP |
-| [ai-engineering-principles.md](02-understand/ai-engineering-principles.md) | Engineering principles | ROI, Token optimization |
-| [tdd-first-principles.md](02-understand/tdd-first-principles.md) | Test-driven development | TestAgent + CodeAgent |
+| File | Use Case + Output |
+|------|-------------------|
+| [subagent-system.md](02-understand/subagent-system.md) | When designing/choosing subagents; specialization, delegation, parallelism |
+| [superclaude-architecture.md](02-understand/superclaude-architecture.md) | Deep dive on routing/orchestration layer; command system and subagent dispatch |
+| [ai-engineering-principles.md](02-understand/ai-engineering-principles.md) | ROI and token optimization framing with worked math examples |
+| [tdd-first-principles.md](02-understand/tdd-first-principles.md) | Why split TestAgent/CodeAgent; handoff format and TDD enforcement rationale |
 
 ### "I want to create custom skills/commands"
 → [03-create/](03-create/)
-| File | Purpose | Output |
-|------|---------|--------|
-| [skill-design-best-practices.md](03-create/skill-design-best-practices.md) | Design custom Skills | New .claude/commands/ |
-| [document-skills-guide.md](03-create/document-skills-guide.md) | Document skills | docx, pptx, pdf handling |
+| File | Use Case + Output |
+|------|-------------------|
+| [skill-design-best-practices.md](03-create/skill-design-best-practices.md) | Naming, structure, validation checklist; ready-to-publish skill skeleton |
+| [document-skills-guide.md](03-create/document-skills-guide.md) | How to call docx/pptx/pdf/xlsx skills; limits and best practices |
 
 ### "I want to master specific features"
 → [04-deep-dive/](04-deep-dive/)
-| File | Topic | Depth |
-|------|--------|-------|
-| [sc-pm-explained.md](04-deep-dive/sc-pm-explained.md) | /sc:pm command | Workflow, memory system |
-| [index-repo-analysis.md](04-deep-dive/index-repo-analysis.md) | /sc:index-repo | Prompt breakdown |
-| [context7-mcp-guide.md](04-deep-dive/context7-mcp-guide.md) | Context7 MCP | Tool details, best practices |
-| [learning-prompts-collection.md](04-deep-dive/learning-prompts-collection.md) | 100+ prompts | 8 topics, practice |
+| File | Use Case + Output |
+|------|-------------------|
+| [sc-pm-explained.md](04-deep-dive/sc-pm-explained.md) | Full /sc:pm workflow, memory use, quality gates |
+| [index-repo-analysis.md](04-deep-dive/index-repo-analysis.md) | Prompt breakdown and token strategy for /sc:index-repo |
+| [context7-mcp-guide.md](04-deep-dive/context7-mcp-guide.md) | How to fetch latest library docs via Context7 MCP; pitfalls and patterns |
+| [learning-prompts-collection.md](04-deep-dive/learning-prompts-collection.md) | 100+ practice prompts across 8 themes for drilling skills |
+| [prompt-layer-design.md](04-deep-dive/prompt-layer-design.md) | Persona/Process/Output/Validation 4-layer prompt template with examples |
+
+### "I want to design learning modes"
+→ [05-learning_mode_design/](05-learning_mode_design/)
+| File | Use Case + Output |
+|------|-------------------|
+| [commands-vs-skills.md](05-learning_mode_design/commands-vs-skills.md) | Decision guide: when to use commands vs skills; naming, sharing, trigger differences |
 
 ### "I want to analyze business/strategy documents"
 → [06-analysis-tools/](06-analysis-tools/)
-| File | Command | Purpose |
-|------|---------|---------|
-| [sc-brainstorm-guide.md](06-analysis-tools/sc-brainstorm-guide.md) | `/sc:brainstorm` | Interactive requirements discovery |
-| [business-panel-guide.md](06-analysis-tools/business-panel-guide.md) | `/sc:business-panel` | Multi-expert business analysis |
-| [README.md](06-analysis-tools/README.md) | Overview | All analysis tools |
+| File | Command/Topic | Use Case + Output |
+|------|---------------|-------------------|
+| [README.md](06-analysis-tools/README.md) | Overview | Map available analysis tools and entry points |
+| [sc-brainstorm-guide.md](06-analysis-tools/sc-brainstorm-guide.md) | `/sc:brainstorm` | Interactive requirements discovery script and templates |
+| [business-panel-guide.md](06-analysis-tools/business-panel-guide.md) | `/sc:business-panel` | Multi-expert business analysis structure and validation checklist |
 
 ### "I want to master Serena (memory system)"
 → [serena-mcp/](serena-mcp/)
-| File | Purpose | Key Benefit |
-|------|---------|-------------|
-| [README.md](serena-mcp/README.md) | Serena overview | Quick start |
-| [01-architecture-overview.md](serena-mcp/01-architecture-overview.md) | Architecture | Component details |
-| [02-configuration-guide.md](serena-mcp/02-configuration-guide.md) | Configuration | project.yml reference |
-| [03-memory-system-design.md](serena-mcp/03-memory-system-design.md) | Memory design | Organization strategies |
-| [04-cross-machine-sync.md](serena-mcp/04-cross-machine-sync.md) | Multi-device | Git sharing |
-| [05-advanced-patterns.md](serena-mcp/05-advanced-patterns.md) | Advanced patterns | MCP tool integration |
+| File | Use Case + Output |
+|------|-------------------|
+| [README.md](serena-mcp/README.md) | 10-minute Serena overview and quick start |
+| [01-architecture-overview.md](serena-mcp/01-architecture-overview.md) | Component map and boundaries when evaluating Serena |
+| [02-configuration-guide.md](serena-mcp/02-configuration-guide.md) | project.yml reference for configuring/launching the server |
+| [03-memory-system-design.md](serena-mcp/03-memory-system-design.md) | Memory namespace design templates and persistence strategy |
+| [04-cross-machine-sync.md](serena-mcp/04-cross-machine-sync.md) | Git sync and ignore strategy for multi-device collaboration |
+| [05-advanced-patterns.md](serena-mcp/05-advanced-patterns.md) | Advanced MCP integration patterns and examples |
+
+### Other root docs
+| File | Use Case + Output |
+|------|-------------------|
+| [README.md](README.md) | Main navigation hub for all topics |
+| [KNOWLEDGE_INDEX.md](KNOWLEDGE_INDEX.md) | This index; fast lookup without loading all docs |
+| [NOTION_MCP_ERRORS.md](NOTION_MCP_ERRORS.md) | Known Notion MCP error cases and fixes |
 
 ---
 
@@ -236,12 +256,13 @@ learning/        # Knowledge capture
 
 ---
 
-## 📖 File Inventory (23 files)
+## 📖 File Inventory (28 files, excluding .DS_Store)
 
-### Setup (3 files)
-- `01-setup/claude-md-best-practices.md`
-- `01-setup/skills-system-guide.md`
+### Setup (4 files)
 - `01-setup/project-index-usage.md`
+- `01-setup/claude-md-best-practices.md`
+- `01-setup/claude-code-architecture.md`
+- `01-setup/skills-system-guide.md`
 
 ### Understanding (4 files)
 - `02-understand/subagent-system.md`
@@ -260,6 +281,9 @@ learning/        # Knowledge capture
 - `04-deep-dive/sc-pm-explained.md`
 - `04-deep-dive/learning-prompts-collection.md`
 
+### Learning Mode Design (1 file)
+- `05-learning_mode_design/commands-vs-skills.md`
+
 ### Analysis Tools (3 files)
 - `06-analysis-tools/sc-brainstorm-guide.md`
 - `06-analysis-tools/business-panel-guide.md`
@@ -273,8 +297,10 @@ learning/        # Knowledge capture
 - `serena-mcp/04-cross-machine-sync.md`
 - `serena-mcp/05-advanced-patterns.md`
 
-### Root (1 file)
+### Root (3 files)
 - `README.md` (main navigation hub)
+- `KNOWLEDGE_INDEX.md` (this index)
+- `NOTION_MCP_ERRORS.md` (Notion MCP known issues)
 
 ---
 
@@ -291,12 +317,14 @@ learning/        # Knowledge capture
 | **Custom Commands** | [01-setup/skills-system-guide.md](01-setup/skills-system-guide.md), [03-create/skill-design-best-practices.md](03-create/skill-design-best-practices.md) |
 | **Requirements Discovery** | [06-analysis-tools/sc-brainstorm-guide.md](06-analysis-tools/sc-brainstorm-guide.md) |
 | **Business Analysis** | [06-analysis-tools/business-panel-guide.md](06-analysis-tools/business-panel-guide.md) |
+| **Command vs Skill Decision** | [05-learning_mode_design/commands-vs-skills.md](05-learning_mode_design/commands-vs-skills.md) |
+| **Architecture Overview** | [01-setup/claude-code-architecture.md](01-setup/claude-code-architecture.md), [02-understand/superclaude-architecture.md](02-understand/superclaude-architecture.md) |
 
 ---
 
 ## 💡 Key Insights
 
-1. **94% Token Savings**: Index reduces 58K → 3K tokens per session
+1. **~94% Token Savings**: Index reduces ≈60K → ≈3.6K tokens/会话（估算）
 2. **4-Layer Prompts**: Persona → Process → Output → Validation
 3. **MCP vs Subagent**: External APIs = MCP, AI reasoning = Subagent
 4. **Serena Memory**: Hierarchical namespace (session/, plan/, learning/)
@@ -304,5 +332,5 @@ learning/        # Knowledge capture
 
 ---
 
-**Status**: Ready for use. Last updated: 2025-01-04
-**Total Files**: 24 (added sc-brainstorm-guide.md)
+**Status**: Ready for use. Last updated: 2026-01-05
+**Total Files**: 28 (excluding .DS_Store)

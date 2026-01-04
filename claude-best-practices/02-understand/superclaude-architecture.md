@@ -1,5 +1,8 @@
 # SuperClaude 架构深度分析
 
+> 面向：需要深入了解 SuperClaude 路由/子代理编排的开发者与 PM  
+> 用途：掌握 `/sc:*` 命令体系如何拆解任务、分配子代理、协调 MCP
+
 > 理解 SuperClaude 的设计哲学和实现机制
 
 ---
@@ -568,3 +571,8 @@ PM Agent 工作流:
 - [PM Agent 完整文档](~/.claude/commands/sc/pm.md)
 - [命令系统概览](~/.claude/commands/sc/README.md)
 - [Serena MCP 文档](https://github.com/testvitamin/serena-mcp)
+
+## 下一步阅读
+
+- 想快速回顾四层体系：参考 `../01-setup/claude-code-architecture.md`
+- 想细化子代理设计：参考 `./subagent-system.md`
