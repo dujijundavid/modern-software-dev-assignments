@@ -7,11 +7,11 @@
 ---
 
 ## 新增/更新（人工维护，最近 5 条）
+- 2026-01-05 `03-create/sc-git-practical-guide.md`：**NEW!** `/sc:git` 实战指南：从原理到最佳实践 🎉
 - 2026-01-05 `KNOWLEDGE_INDEX.md`：同步文件计数、日期与节省率说明
 - 2026-01-05 `01-setup/claude-code-architecture.md`：新增受众说明与下一步阅读
 - 2026-01-05 `02-understand/superclaude-architecture.md`：补充编排/路由视角与互链
 - 2026-01-05 `05-learning_mode_design/commands-vs-skills.md`：命令 vs Skills 决策对比
-- 2026-01-05 `04-deep-dive/prompt-layer-design.md`：4 层 Prompt 设计框架收录
 
 ---
 
@@ -42,6 +42,7 @@
 |------|--------------------|
 | [Skill 设计最佳实践](03-create/skill-design-best-practices.md) | 要发布/分享技能时，拿到命名、结构、校验清单与打包指引 |
 | [Document Skills 使用指南](03-create/document-skills-guide.md) | 处理 docx/pptx/pdf/xlsx 等文档时，快速获取调用示例与限制 |
+| [/sc:git 实战指南](03-create/sc-git-practical-guide.md) | **NEW!** 深度理解 `/sc:git`：Smart Commits、状态分析、工作流优化；覆盖个人/团队实战场景 |
 
 ---
 
@@ -104,7 +105,8 @@ claude-best-practices/
 │
 ├── 03-create/                     # 【我要创建/开发】
 │   ├── skill-design-best-practices.md
-│   └── document-skills-guide.md
+│   ├── document-skills-guide.md
+│   └── sc-git-practical-guide.md   # /sc:git 实战指南 🎉
 │
 ├── 04-deep-dive/                  # 【我要深入学习】
 │   ├── sc-pm-explained.md

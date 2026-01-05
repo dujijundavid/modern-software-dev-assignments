@@ -52,6 +52,7 @@ claude-best-practices/
 |------|-------------------|
 | [skill-design-best-practices.md](03-create/skill-design-best-practices.md) | Naming, structure, validation checklist; ready-to-publish skill skeleton |
 | [document-skills-guide.md](03-create/document-skills-guide.md) | How to call docx/pptx/pdf/xlsx skills; limits and best practices |
+| [sc-git-practical-guide.md](03-create/sc-git-practical-guide.md) | **NEW!** Master /sc:git: Smart Commits, status analysis, workflow optimization; real-world scenarios |
 
 ### "I want to master specific features"
 → [04-deep-dive/](04-deep-dive/)
@@ -270,9 +271,10 @@ learning/        # Knowledge capture
 - `02-understand/ai-engineering-principles.md`
 - `02-understand/tdd-first-principles.md`
 
-### Creation (2 files)
+### Creation (3 files)
 - `03-create/skill-design-best-practices.md`
 - `03-create/document-skills-guide.md`
+- `03-create/sc-git-practical-guide.md` (NEW!)
 
 ### Deep Dive (5 files)
 - `04-deep-dive/prompt-layer-design.md`
@@ -315,6 +317,7 @@ learning/        # Knowledge capture
 | **AI Agents** | [02-understand/subagent-system.md](02-understand/subagent-system.md), [04-deep-dive/sc-pm-explained.md](04-deep-dive/sc-pm-explained.md) |
 | **Test-Driven Development** | [02-understand/tdd-first-principles.md](02-understand/tdd-first-principles.md) |
 | **Custom Commands** | [01-setup/skills-system-guide.md](01-setup/skills-system-guide.md), [03-create/skill-design-best-practices.md](03-create/skill-design-best-practices.md) |
+| **Git Workflow (/sc:git)** | [03-create/sc-git-practical-guide.md](03-create/sc-git-practical-guide.md) |
 | **Requirements Discovery** | [06-analysis-tools/sc-brainstorm-guide.md](06-analysis-tools/sc-brainstorm-guide.md) |
 | **Business Analysis** | [06-analysis-tools/business-panel-guide.md](06-analysis-tools/business-panel-guide.md) |
 | **Command vs Skill Decision** | [05-learning_mode_design/commands-vs-skills.md](05-learning_mode_design/commands-vs-skills.md) |
@@ -333,4 +336,5 @@ learning/        # Knowledge capture
 ---
 
 **Status**: Ready for use. Last updated: 2026-01-05
-**Total Files**: 28 (excluding .DS_Store)
+**Total Files**: 29 (excluding .DS_Store)
+**Latest Addition**: sc-git-practical-guide.md 🎉
