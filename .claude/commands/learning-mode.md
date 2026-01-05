@@ -480,25 +480,33 @@ AskUserQuestion(
             "options": [
                 {
                     "label": "[Option A]",
-                    "description": "[Additional context if needed]"
+                    "description": "[Context hint - what this option means]"
                 },
                 {
-                    "label": "[Option B - correct]",
-                    "description": "[Additional context]"
+                    "label": "[Option B]",
+                    "description": "[Context hint - what this option means]"
                 },
                 {
                     "label": "[Option C]",
-                    "description": "[Common misconception explanation]"
+                    "description": "[Context hint - what this option means]"
                 },
                 {
                     "label": "[Option D]",
-                    "description": "[Partially correct but incomplete]"
+                    "description": "[Context hint - what this option means]"
                 }
             ],
             "multiSelect": false
         }
     ]
 )
+
+# ❌ AVOID: Don't include "correct" or "incorrect" in descriptions
+# The description should provide educational context, not reveal the answer
+
+# ✅ AFTER user responds, provide feedback:
+# - ✅ Correct: "Exactly right!" + additional insight
+# - ⚠️ Partial: "You're on the right track, but..." + clarification
+# - ❌ Incorrect: "Not quite - let me explain..." + targeted explanation
 ```
 
 **After user responds, provide feedback:**
