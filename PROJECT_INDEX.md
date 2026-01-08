@@ -1,7 +1,7 @@
 # CS146S: Modern Software Developer - Project Index
 
 > Generated: 2025-12-30
-> Last Updated: 2025-12-30 (v1.3)
+> Last Updated: 2026-01-08 (v1.4)
 > Course: Stanford CS146S Fall 2025
 > Goal: Train top-tier AI Engineers through 8-week intensive curriculum
 
@@ -109,6 +109,7 @@ modern-software-dev-assignments/
 |   |   +-- context7-mcp-guide.md
 |   |   +-- prompt-layer-design.md
 |   |   +-- learning-prompts-collection.md
+|   +-- 05-learning_mode_design/   # Learning mode design docs
 |   +-- serena-mcp/                # Serena MCP guides (6 files)
 |       +-- README.md
 |       +-- 01-architecture-overview.md
@@ -118,7 +119,7 @@ modern-software-dev-assignments/
 |       +-- 05-advanced-patterns.md
 |
 +-- .claude/                  # Claude Code configuration
-|   +-- commands/             # Custom slash commands (7 files)
+|   +-- commands/             # Custom slash commands (10 files)
 |   |   +-- week.md           # /week - Weekly assignment help
 |   |   +-- explore-week.md   # /explore-week - Week analysis
 |   |   +-- test-week.md      # /test-week - Run tests
@@ -126,6 +127,9 @@ modern-software-dev-assignments/
 |   |   +-- mcp-server.md     # /mcp-server - Week 3 helper
 |   |   +-- refactor.md       # /refactor - Code cleanup
 |   |   +-- review-pr.md      # /review-pr - PR review
+|   |   +-- tdd-cycle.md      # /tdd-cycle - TDD workflow
+|   +-- subagents/            # TDD subagents (2 files)
+|   +-- settings.local.json   # Local settings
 |   +-- SUBAGENT_GUIDE.md
 |
 +-- .serena/                  # Serena MCP integration
@@ -136,7 +140,12 @@ modern-software-dev-assignments/
 |       +-- tech_stack.md
 |       +-- llm_integration_patterns.md
 |
++-- learning_progress/        # Learning progress tracking
+|   +-- index.md
+|   +-- multi_agent_design_patterns_2025-01-01.md
+|
 +-- CLAUDE.md                 # AI configuration (with team config)
++-- META_LEARNING.md          # Learning framework & capability levels
 +-- pyproject.toml            # Poetry 2.2.1 dependency management
 +-- PROJECT_INDEX.md          # This file
 +-- PROJECT_INDEX.json        # Machine-readable index
@@ -240,7 +249,7 @@ modern-software-dev-assignments/
 ## Claude Best Practices Collection
 
 **Location**: [claude-best-practices/](claude-best-practices/)
-**Updated**: 2025-12-30
+**Updated**: 2026-01-08
 **Purpose**: Comprehensive guide for Claude Code and SuperClaude mastery
 
 ### Navigation Structure
@@ -270,6 +279,10 @@ claude-best-practices/
 │   ├── prompt-layer-design.md     # Prompt layer design
 │   └── learning-prompts-collection.md # 100+ prompts
 │
+├── 05-learning_mode_design/       # 【Learning Mode Design】
+│   ├── commands-vs-skills.md      # Commands vs Skills comparison
+│   └── [more design docs...]
+│
 └── serena-mcp/                    # 【Serena MCP 系统】
     ├── README.md                  # Serena overview
     ├── 01-architecture-overview.md
@@ -287,24 +300,8 @@ claude-best-practices/
 | **Architecture** | 3 files | Subagents, system design, principles |
 | **Creation** | 2 files | Skill design, document processing |
 | **Deep Dive** | 5 files | Command internals, MCP integration |
+| **Learning Mode** | 1+ files | Learning mode design patterns |
 | **Serena** | 6 files | Memory system, cross-machine sync |
-
-### Learning Path
-
-**Day 1-3**: Setup & Configuration
-1. [project-index-usage.md](claude-best-practices/01-setup/project-index-usage.md) - Token efficiency
-2. [claude-md-best-practices.md](claude-best-practices/01-setup/claude-md-best-practices.md) - AI behavior
-3. [skills-system-guide.md](claude-best-practices/01-setup/skills-system-guide.md) - Custom skills
-
-**Day 4-7**: Understanding System
-1. [subagent-system.md](claude-best-practices/02-understand/subagent-system.md) - Delegation
-2. [superclaude-architecture.md](claude-best-practices/02-understand/superclaude-architecture.md) - Architecture
-3. [ai-engineering-principles.md](claude-best-practices/02-understand/ai-engineering-principles.md) - ROI
-
-**Day 8-14**: Serena Mastery
-1. [README.md](claude-best-practices/serena-mcp/README.md) - Overview
-2. [02-configuration-guide.md](claude-best-practices/serena-mcp/02-configuration-guide.md) - Configuration
-3. [03-memory-system-design.md](claude-best-practices/serena-mcp/03-memory-system-design.md) - Memory
 
 ---
 
@@ -327,6 +324,7 @@ httpx = ">=0.24.0"             # Async HTTP
 black = ">=24.1.0"             # Formatter
 ruff = ">=0.4.0"               # Linter
 pre-commit = ">=3.6.0"         # Git hooks
+pytest-cov = "^7.0.0"          # Coverage reporting
 ```
 
 ### Toolchain
@@ -428,6 +426,7 @@ make run  # or python -m uvicorn app.main:app --reload
 /test-week         # Run and analyze tests
 /mcp-server        # MCP server help
 /refactor          # Systematic code cleanup
+/tdd-cycle         # Test-Driven Development workflow
 ```
 
 ---
@@ -439,6 +438,7 @@ make run  # or python -m uvicorn app.main:app --reload
 | Resource | Path | Purpose |
 |----------|------|---------|
 | Learning Strategy | [learning_notes/00_learning_strategy.md](learning_notes/00_learning_strategy.md) | BPRT cycle |
+| META_LEARNING | [META_LEARNING.md](META_LEARNING.md) | Capability levels framework |
 | Week 2 Example | [learning_notes/week2/_archive/WEEK2_LEARNING_SUMMARY.md](learning_notes/week2/_archive/WEEK2_LEARNING_SUMMARY.md) | Note template |
 | AI Config | [CLAUDE.md](CLAUDE.md) | AI team config |
 | Serena Config | [.serena/](.serena/) | MCP integration |
@@ -460,14 +460,16 @@ make run  # or python -m uvicorn app.main:app --reload
 | Metric | Count |
 |--------|-------|
 | **Week folders** | 8 |
-| **Python files** | ~90 |
-| **Markdown docs** | ~110 |
+| **Python files** | 89 |
+| **Markdown docs** | 132 |
 | **Test files** | ~20 |
 | **Learning notes** | ~30 |
-| **Custom commands** | 7 |
-| **Claude best practices** | 20+ |
+| **Custom commands** | 10 |
+| **Claude best practices** | 25+ |
 | **Serena memories** | 12 |
 | **MCP servers** | 2 (Notion, Weather) |
+| **Largest week** | week5 (159M) |
+| **Latest commit** | 2026-01-08 |
 
 ---
 
@@ -509,7 +511,7 @@ make run  # or python -m uvicorn app.main:app --reload
 
 ---
 
-**Index Version:** 1.3
-**Last Updated:** 2025-12-30
-**Changes**: Added file naming convention, updated claude-best-practices section, added writeup.md references
+**Index Version:** 1.4
+**Last Updated:** 2026-01-08
+**Changes**: Added META_LEARNING.md reference, updated learning_mode_design section, added latest commit info, updated statistics
 **Maintained by:** AI Agent (Claude Code)

@@ -86,7 +86,11 @@
       "Bash(rm -f *.py:*)",
       "Bash(rm -f *.txt:*)",
       "Bash(rm -f *.md:*)",
-      "Bash(rmdir:*)"
+      "Bash(rmdir:*)",
+      "Skill(sc:index)",
+      "Skill(sc:index:*)",
+      "Skill(sc:git)",
+      "Skill(sc:git:*)"
     ]
   },
   "enableAllProjectMcpServers": true

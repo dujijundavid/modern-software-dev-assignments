@@ -4,6 +4,28 @@ This document contains configuration and guidance for Claude Code agents working
 
 ---
 
+## 📖 Required Reading for All Tasks
+
+**Before starting any task, you MUST read:**
+
+1. **[PROJECT_INDEX.md](PROJECT_INDEX.md)** - Project structure overview
+   - Token efficiency: 3,000 tokens vs 58,000 for full codebase (94% savings)
+   - Contains: 8-week curriculum, tech stack, file organization, quick start commands
+
+2. **[PROJECT_INDEX.json](PROJECT_INDEX.json)** - Machine-readable metadata
+   - Structured data for programmatic access
+   - Includes: version info, statistics, learning paths, tech stack details
+
+3. **[CLAUDE.md](CLAUDE.md)** - This file (AI team configuration and workflows)
+
+**Why read these first?**
+- Provides essential context about the CS146S Modern Software Developer course
+- Prevents redundant file exploration
+- Ensures consistency with project patterns and conventions
+- Saves time and tokens for both you and the user
+
+---
+
 ## 🧠 AI Engineering Mindset (The "Mihail Eric" Framework)
 
 When working on this repository, adopt the **Agentic Development** mindset:
