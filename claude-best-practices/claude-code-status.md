@@ -1,24 +1,30 @@
 # Claude Code 系统状态
 
-## 版本信息
-- **Claude Code**: v2.0.71
-- **安装方式**: VSCode Extension / CLI
+> **⚠️ 注意**：本文档记录特定时间点的系统配置，作为参考快照。
+> 当前最新状态请运行：`claude mcp list`
 
-## MCP 服务器 (5个已连接 ✅)
+## 版本信息
+- **Claude Code**: v2.0.61
+- **安装方式**: VSCode Extension / CLI
+- **快照日期**: 2026-01-08
+
+## MCP 服务器 (6个配置，4个已连接 ✅)
 
 | 服务器 | 状态 | 命令 |
 |--------|------|------|
 | `context7` | ✓ Connected | `npx -y @upstash/context7-mcp` |
-| `serena` | ✓ Connected | `uvx serena start-mcp-server` |
+| `serena` | ✓ Connected | `uvx --from git+https://github.com/oraios/serena serena start-mcp-server` |
 | `chrome-devtools` | ✓ Connected | `npx -y chrome-devtools-mcp@latest` |
 | `playwright` | ✓ Connected | `npx -y @playwright/mcp@latest` |
-| `sequential-thinking` | ✓ Connected | `npx -y @modelcontextprotocol/server-sequential-thinking` |
+| `magic` | ✓ Connected | `npx -y @21st-dev/magic` |
+| `sequential-thinking` | ✗ Failed | `npx -y @modelcontextprotocol/server-sequential-thinking` |
+| `notion` | ✗ Failed | `npx -y @notionhq/notion-mcp-server` |
 
 ## SuperClaude Framework (v4.1.7)
 
 位置: `~/.claude/commands/sc/`
 
-### 27个 `/sc:` 命令
+### 30+ 个 `/sc:` 命令（34个文件）
 
 **核心开发**:
 - `/sc:implement` - 功能实现
@@ -93,7 +99,7 @@
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    VSCode Extension                         │
-│                  Claude Code v2.0.71                        │
+│                  Claude Code v2.0.61                        │
 └─────────────────────────────────────────────────────────────┘
                               │
                               ▼
@@ -143,4 +149,4 @@ claude -p "your prompt"
 | MCP配置 | 通过Trae CN管理 |
 
 ---
-*生成日期: 2025-01-05*
+*最后更新: 2026-01-08*

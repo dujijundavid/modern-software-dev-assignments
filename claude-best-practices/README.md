@@ -1,14 +1,16 @@
 # Claude Best Practices
 
 > 深入理解 Claude Code 和 SuperClaude 的最佳实践集合
+>
+> **📊 项目统计**：28 文件 | ~94% Token 节省 (60K → 3.6K) | 最后更新: 2026-01-05
 
 这个文件夹包含了系统化的学习和参考材料，帮助你更好地掌握 AI 辅助编程。
 
 ---
 
-## 新增/更新（人工维护，最近 5 条）
+## 📝 新增/更新（人工维护，最近 5 条）
 - 2026-01-05 `03-create/sc-git-practical-guide.md`：**NEW!** `/sc:git` 实战指南：从原理到最佳实践 🎉
-- 2026-01-05 `KNOWLEDGE_INDEX.md`：同步文件计数、日期与节省率说明
+- 2026-01-05 `README.md`：合并 KNOWLEDGE_INDEX，增强项目统计与搜索索引
 - 2026-01-05 `01-setup/claude-code-architecture.md`：新增受众说明与下一步阅读
 - 2026-01-05 `02-understand/superclaude-architecture.md`：补充编排/路由视角与互链
 - 2026-01-05 `05-learning_mode_design/commands-vs-skills.md`：命令 vs Skills 决策对比
@@ -167,6 +169,55 @@ claude-best-practices/
 
 ---
 
+## 🔍 按主题搜索
+
+| 主题 | 主要文件 |
+|------|---------|
+| **Prompt 设计** | [04-deep-dive/prompt-layer-design.md](04-deep-dive/prompt-layer-design.md), [02-understand/ai-engineering-principles.md](02-understand/ai-engineering-principles.md) |
+| **Token 优化** | [01-setup/project-index-usage.md](01-setup/project-index-usage.md), [04-deep-dive/index-repo-analysis.md](04-deep-dive/index-repo-analysis.md) |
+| **MCP 开发** | [03-create/skill-design-best-practices.md](03-create/skill-design-best-practices.md), [04-deep-dive/context7-mcp-guide.md](04-deep-dive/context7-mcp-guide.md) |
+| **内存系统** | [serena-mcp/README.md](serena-mcp/README.md), [serena-mcp/03-memory-system-design.md](serena-mcp/03-memory-system-design.md) |
+| **AI 代理** | [02-understand/subagent-system.md](02-understand/subagent-system.md), [04-deep-dive/sc-pm-explained.md](04-deep-dive/sc-pm-explained.md) |
+| **TDD** | [02-understand/tdd-first-principles.md](02-understand/tdd-first-principles.md) |
+| **自定义命令** | [01-setup/skills-system-guide.md](01-setup/skills-system-guide.md), [03-create/skill-design-best-practices.md](03-create/skill-design-best-practices.md) |
+| **Git 工作流** | [03-create/sc-git-practical-guide.md](03-create/sc-git-practical-guide.md) |
+| **需求发现** | [06-analysis-tools/sc-brainstorm-guide.md](06-analysis-tools/sc-brainstorm-guide.md) |
+| **商业分析** | [06-analysis-tools/business-panel-guide.md](06-analysis-tools/business-panel-guide.md) |
+
+---
+
+## 📋 命名约定速查
+
+| 类型 | 模式 | 示例 |
+|------|------|------|
+| **MCP Server** | `{name}` | `weather`, `notion-integration` |
+| **MCP Tool** | `{verb}_{noun}` | `get_alerts`, `create_page` |
+| **Subagent** | `{role}-{expert}` | `fastapi-expert`, `code-reviewer` |
+| **Slash Command** | `/sc:{action}` | `/sc:implement`, `/sc:test` |
+
+---
+
+## 🗂️ Serena 内存 Schema
+
+```
+session/         # 会话状态
+  ├── context      # 完整快照
+  ├── last         # 上一会话
+  └── checkpoint   # 进度快照
+
+plan/            # 规划产物
+  ├── [feature]/hypothesis
+  ├── [feature]/architecture
+  └── [feature]/rationale
+
+learning/        # 知识沉淀
+  ├── patterns/[name]
+  ├── solutions/[error]
+  └── mistakes/[timestamp]
+```
+
+---
+
 ## 核心概念速查
 
 ### Prompt Engineering 4 层模型
@@ -186,6 +237,12 @@ claude-best-practices/
 | 分模块索引 | 按需加载 | 模块化项目 |
 | 增量更新 | 减少重建 | 频繁变更 |
 | 压缩冗余 | 减少噪音 | 文档多的项目 |
+
+**ROI 数学**：
+```
+回本会话数 = 创建成本 / (全文Tokens - 索引Tokens)
+示例: 2000 / (58000 - 3000) = 0.036 → 1次会话即回本！
+```
 
 ### Claude Code 三个核心
 

@@ -90,7 +90,9 @@
       "Skill(sc:index)",
       "Skill(sc:index:*)",
       "Skill(sc:git)",
-      "Skill(sc:git:*)"
+      "Skill(sc:git:*)",
+      "Bash(grep:*)",
+      "Bash(mv:*)"
     ]
   },
   "enableAllProjectMcpServers": true
