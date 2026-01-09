@@ -92,7 +92,9 @@
       "Skill(sc:git)",
       "Skill(sc:git:*)",
       "Bash(grep:*)",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "mcp__sequential-thinking__sequentialthinking",
+      "mcp__serena__list_dir"
     ]
   },
   "enableAllProjectMcpServers": true
